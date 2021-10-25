@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://shaonmajumder.github.io" target="_blank"><img src="links.jpg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -32,21 +32,6 @@ laravel login not found - https://stackoverflow.com/questions/30154016/laravel-5
 > sudo apt-get update
 ###### install typora
 > sudo apt-get install typora
-
-### Maintainence activity
-#### Git repository
-
-[ initialization 
-Initialized empty Git repository 
-git init
-]
-
-git config user.name "Shaon Majumder"
-git config user.email "smazoomder@gmail.com"
-git add .
-git commit -m "documentation to auth"
-git remote add origin https://github.com/ShaonMajumder/Links.git
-git push origin master
 
 
 
