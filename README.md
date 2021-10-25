@@ -33,6 +33,21 @@ laravel login not found - https://stackoverflow.com/questions/30154016/laravel-5
 ###### install typora
 > sudo apt-get install typora
 
+### Maintainence activity
+#### Git repository
+
+[ initialization 
+Initialized empty Git repository 
+git init
+]
+
+git config user.name "Shaon Majumder"
+git config user.email "smazoomder@gmail.com"
+git add .
+git commit -m "documentation to auth"
+git remote add origin https://github.com/ShaonMajumder/Links.git
+git push origin master
+
 
 
 ### Install
