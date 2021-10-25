@@ -12,15 +12,15 @@
 ## Build
 helpers -
 
-[create laravel project](https://laravel.com/docs/8.x/installation)
-[check laravel version](https://laravel.com/docs/4.2/artisan)
+[create laravel project](https://laravel.com/docs/8.x/installation)  <br /> 
+[check laravel version](https://laravel.com/docs/4.2/artisan)  <br /> 
 [auth scaffolding laravel 8 login does not show anything,
-laravel login not found](https://stackoverflow.com/questions/30154016/laravel-5-auth-login-not-found/38733535)
-[install npm ubuntu](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/)
-[login register scaffolding laravel](https://laravel.com/docs/6.x/authentication)
-[how to disable a config file in apache2](https://www.digitalocean.com/community/tutorials/apache-basics-installation-and-configuration-troubleshooting)
-[foreach laravel](https://stackoverflow.com/questions/24277443/laravel-foreach-loop-in-controller)
-[The stream or file "laravel.log" could not be opened in append mode: failed to open stream: Permission denied](https://stackoverflow.com/questions/23411520/how-to-fix-error-laravel-log-could-not-be-opened)
+laravel login not found](https://stackoverflow.com/questions/30154016/laravel-5-auth-login-not-found/38733535)  <br /> 
+[install npm ubuntu](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/)  <br /> 
+[login register scaffolding laravel](https://laravel.com/docs/6.x/authentication)  <br /> 
+[how to disable a config file in apache2](https://www.digitalocean.com/community/tutorials/apache-basics-installation-and-configuration-troubleshooting)  <br /> 
+[foreach laravel](https://stackoverflow.com/questions/24277443/laravel-foreach-loop-in-controller)  <br /> 
+[The stream or file "laravel.log" could not be opened in append mode: failed to open stream: Permission denied](https://stackoverflow.com/questions/23411520/how-to-fix-error-laravel-log-could-not-be-opened) 
 
 
 ### Preparation
