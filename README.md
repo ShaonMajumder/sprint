@@ -22,8 +22,20 @@ laravel login not found](https://stackoverflow.com/questions/30154016/laravel-5-
 [foreach laravel](https://stackoverflow.com/questions/24277443/laravel-foreach-loop-in-controller)  <br /> 
 [The stream or file "laravel.log" could not be opened in append mode: failed to open stream: Permission denied](https://stackoverflow.com/questions/23411520/how-to-fix-error-laravel-log-could-not-be-opened) 
 
+## Error
+
+vhost forbidden -
+
+check vhost is pointed to corrected folder and hosts file
+
+**Rewrite mod**
+
+>  sudo a2enmod rewrite
+
+>  sudo service apache2 restart
 
 ### Preparation
+
 #### LAMP
 #### PHPMYADMIN
 #### composer
