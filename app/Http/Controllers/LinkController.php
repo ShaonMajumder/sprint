@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Link;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class LinkController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +24,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users =  User::paginate(5);
-        return view('users', [
-            'users' => $users
+        $links =  Link::paginate(5);
+        return view('links', [
+            'links' => $links
         ]);
     }
 
@@ -24,6 +34,7 @@ class UserController extends Controller
     {
         //
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -49,10 +60,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Link $link)
     {
         //
     }
@@ -60,10 +71,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Link $link)
     {
         //
     }
@@ -72,10 +83,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Link $link)
     {
         //
     }
@@ -83,10 +94,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Link $link)
     {
         //
     }

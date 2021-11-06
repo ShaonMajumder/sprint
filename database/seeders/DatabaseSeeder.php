@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Link;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,9 +24,10 @@ class DatabaseSeeder extends Seeder
             "password" => $default_password
         ]);
 
-        User::factory(50)->create([
+        User::factory(100)->create([
             "password" => $default_password
         ]);
 
+        Link::factory(10)->create();
     }
 }

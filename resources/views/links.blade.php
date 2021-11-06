@@ -21,16 +21,22 @@
                     <thead>
                         <tr class="table-success">
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Last name</th>
+                            <th scope="col">Sort Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">URL</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($users as $data)
+                        @foreach($links as $data)
                         <tr>
                             <th scope="row">{{ $data->id }}</th>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->email }}</td>
+                            <td>{{ $data->sort_id }}</td>
+                            <td>{{ $data->title }}</td>
+                            <td>{{ $data->category }}</td>
+                            <td>{{ $data->description }}</td>
+                            <td>{{ $data->URL }}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -38,7 +44,7 @@
 
                 {{-- Pagination --}}
                 <div class="d-flex justify-content-center">
-                    {{ $users->links() }}
+                    {{ $links->links() }}
                 </div>
 
             </div>

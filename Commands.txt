@@ -1,0 +1,2 @@
+php artisan make:model Link -a
+php artisan migrate:fresh --seed

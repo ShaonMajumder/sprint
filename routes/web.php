@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+Route::get('/links', [App\Http\Controllers\LinkController::class, 'index'])->name('links');
+
+//Route::get('/', 'ItemController@itemView');
+Route::post('/update-items', [App\Http\Controllers\UserController::class, 'updateItems'])->name('update.items');
