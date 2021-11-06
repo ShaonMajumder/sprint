@@ -34,6 +34,13 @@ check vhost is pointed to corrected folder and hosts file
 
 >  sudo service apache2 restart
 
+page expired 419 laravel -
+
+> php artisan cache:clear
+
+pagination button laravel broken -
+https://stackoverflow.com/questions/63840416/how-to-fix-laravel-8-ui-paginate-problem
+
 ### Preparation
 
 #### LAMP
