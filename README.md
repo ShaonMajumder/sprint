@@ -137,6 +137,12 @@ browse at http://links.test now
 ##### If Error UnexpectedValueException
 The stream or file "/home/shaon/Projects/links/storage/logs/laravel.log" could not be opened in append mode: failed to open stream: Permission denied 
 
+sudo chmod -R 777 links
+
+##### Exception
+Unable to create lockable file: /home/shaon/Projects/links/storage/framework
+ls -l storage
+sudo chmod -R 777 storage/
 
 **Give permission to project folder**
 (Change the permission to secured permission in live server else, you will be vulnerable to security attacks)
@@ -201,6 +207,20 @@ Browse at http://links.test/register
 
 stop giving password repeatedly github -
 > git config --global credential.helper cache 
+
+## How to clone this project 
+git clone <repo_link>
+composer update
+cp .env.example
+vhost
+php artisan migrate:fresh --seed
+
+
+Exception
+Unable to create lockable file:
+
+Exception
+Unable to create lockable file:
 
 
 ## About Laravel
