@@ -212,15 +212,30 @@ stop giving password repeatedly github -
 git clone <repo_link>
 composer update
 cp .env.example
-vhost
 php artisan migrate:fresh --seed
+check vhost properly
+
+For clearing
+-----------
+sudo php artisan cache:forget spatie.permission.cache 
+sudo php artisan cache:clear
+
+
+sudo php artisan cache:clear
+sudo php artisan config:clear
+sudo php artisan config:cache
+sudo php artisan view:clear
+sudo php artisan route:clear
+sudo php artisan route:cache
+sudo php artisan clear-compiled
+sudo php artisan optimize:clear
+
 
 
 Exception
 Unable to create lockable file:
+set .env 
 
-Exception
-Unable to create lockable file:
 
 
 ## About Laravel
