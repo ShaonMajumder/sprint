@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+import 'datatables.net-bs4';
+var $ = require( "jquery" );
 
 window.Vue = require('vue').default;
 

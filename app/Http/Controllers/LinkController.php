@@ -30,9 +30,22 @@ class LinkController extends Controller
         ]);
     }
 
-    public function updateItems()
+    public function updateItems(Request $request)
     {
-        //
+        $links = Link::all();
+
+        foreach ($links as $link) {
+            $link->timestamps = false; // To disable update_at field updation
+            $id = $link->id;
+
+            foreach ($request->order as $order) {
+                if ($order['id'] == $id) {
+                    $link->update(['sort_id' => $order['position']]);
+                }
+            }
+        }
+        
+        return response('Update Successfully.', 200);
     }
     
 

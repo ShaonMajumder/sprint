@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+
+<script>
+
+    $("#table").DataTable();
+    
+    window.onload = function() {
+        if (window.jQuery) {  
+            // jQuery is loaded  
+            alert("Yeah!");
+        } else {
+            // jQuery is not loaded
+            alert("Doesn't Work");
+        }
+    }
+    </script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -17,7 +33,7 @@
                     {{ __('You are logged in!') }}
                 </div>
 
-                <table class="table table-striped table-bordered table-hover mb-5">
+                <table id="table" class="table table-striped table-bordered table-hover mb-5">
                     <thead>
                         <tr class="table-success">
                             <th scope="col">#</th>
@@ -28,9 +44,9 @@
                             <th scope="col">URL</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tablecontents">
                         @foreach($links as $data)
-                        <tr>
+                        <tr class="row1" data-id="{{ $data->id }}">
                             <th scope="row">{{ $data->id }}</th>
                             <td>{{ $data->sort_id }}</td>
                             <td>{{ $data->title }}</td>
@@ -51,4 +67,7 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection
