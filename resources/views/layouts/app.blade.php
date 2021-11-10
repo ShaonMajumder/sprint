@@ -15,67 +15,34 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+
     
-    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 
 
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.jqueryui.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
+<script>
+  
+    $("#table").DataTable();
 
+   
+        
+        $('#tablecontents').sortable();
+$('#tablecontents').on('sortupdate',function(){
+   console.log('update called');
+});
+$('#tablecontents').trigger('sortupdate'); // logs update called.
 
-    <script>
+ 
 
-
-        $("#table").DataTable();
-    
-        $( "#tablecontents" ).sortable({
-            items: "tr",
-            cursor: 'move',
-            opacity: 0.6,
-            update: function() {
-                sendOrderToServer();
-            }
-        });
-    
-        function sendOrderToServer() {
-    
-            var order = [];
-            $('tr.row1').each(function(index,element) {
-                order.push({
-                id: $(this).attr('data-id'),
-                position: index+1
-                });
-            });
-    
-            $.ajax({
-                type: "POST", 
-                dataType: "json", 
-                url: "{{ url('links/sortabledatatable') }}",
-                data: {
-                order:order,
-                _token: '{{csrf_token()}}'
-                },
-                success: function(response) {
-                    if (response.status == "success") {
-                    console.log(response);
-                    } else {
-                    console.log(response);
-                    }
-                }
-            });
-    
-        }
-       
-    </script>
-
+</script>
 
 </head>
 <body>

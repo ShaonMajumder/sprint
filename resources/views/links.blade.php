@@ -22,9 +22,10 @@
                     {{ __('You are logged in!') }}
                 </div>
 
-                <table id="table" class="table table-striped table-bordered table-hover mb-5">
+                <table id="table"  class="table table-striped table-bordered table-hover mb-5">
                     <thead>
                         <tr class="table-success">
+                            <th scope="col">Move</th>
                             <th scope="col">#</th>
                             <th scope="col">Sort Id</th>
                             <th scope="col">Title</th>
@@ -33,15 +34,24 @@
                             <th scope="col">URL</th>
                         </tr>
                     </thead>
-                    <tbody id="tablecontents">
+                    <tbody id="tablecontents" class="ui-sortable">
                         @foreach($links as $data)
-                        <tr class="row1" data-id="{{ $data->id }}">
-                            <th scope="row">{{ $data->id }}</th>
+                        
+                            
+
+                        <tr class="row1 ui-sortable-handle" data-id="{{ $data->id }}" role="row">
+                            <td>
+                                <div style="color:rgb(124,77,255); padding-left: 10px; float: left; font-size: 20px; cursor: pointer;" title="change display order">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </td>
+                            <td>{{ $data->id }}</td> 
                             <td>{{ $data->sort_id }}</td>
                             <td>{{ $data->title }}</td>
                             <td>{{ $data->category }}</td>
                             <td>{{ $data->description }}</td>
-                            <td>{{ $data->URL }}</td>
+                            <td>{{ $data->url }}</td>
                         </tr>
                         @endforeach
                     </tbody>
