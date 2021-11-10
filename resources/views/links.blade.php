@@ -2,20 +2,9 @@
 
 @section('content')
 
-<script>
 
-    $("#table").DataTable();
-    
-    window.onload = function() {
-        if (window.jQuery) {  
-            // jQuery is loaded  
-            alert("Yeah!");
-        } else {
-            // jQuery is not loaded
-            alert("Doesn't Work");
-        }
-    }
-    </script>
+
+
 
 <div class="container">
     <div class="row justify-content-center">
