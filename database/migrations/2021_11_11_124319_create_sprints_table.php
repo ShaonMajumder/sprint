@@ -15,6 +15,11 @@ class CreateSprintsTable extends Migration
     {
         Schema::create('sprints', function (Blueprint $table) {
             $table->id();
+            $table->integer('sort_id')->unsigned()->default(0);
+            $table->string('title');
+            $table->string('category');
+            $table->string('description');
+            $table->string('url')->unique();
             $table->timestamps();
         });
     }

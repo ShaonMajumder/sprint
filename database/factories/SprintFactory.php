@@ -2,19 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Link;
+use App\Models\Sprint;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class LinkFactory extends Factory
+class SprintFactory extends Factory
 {
-
-     /**
+    /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Link::class;
+    protected $model = Sprint::class;
 
     /**
      * Define the model's default state.

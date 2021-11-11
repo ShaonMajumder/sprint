@@ -25,7 +25,7 @@ Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->nam
 Route::get('/sprint', [App\Http\Controllers\SprintController::class, 'index'])->name('sprint');
 
 
-Route::post('links/sortabledatatable', [App\Http\Controllers\LinkController::class, 'updateItems'])->name('links_update');
+Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updateItems'])->name('links_update');
 
 
 

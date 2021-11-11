@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Link;
+use App\Models\Sprint;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,6 +29,6 @@ class DatabaseSeeder extends Seeder
             "password" => $default_password
         ]);
 
-        Link::factory(5)->create();
+        Sprint::factory(5)->create();
     }
 }

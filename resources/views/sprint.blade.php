@@ -16,7 +16,7 @@
         </thead>
         <tbody id="tablecontents" >
           
-            @foreach($links as $data)
+            @foreach($tasks as $data)
             <tr class="rowRef" data-id="{{ $data->id }}" >
              
                 <td>{{ $data->title }}</td>
@@ -33,7 +33,7 @@
               <td colspan="8" class="done" >  <span style="color:white;">Done</span>  </td>
               
           </tr>
-            @foreach($links as $data)
+            @foreach($tasks as $data)
             <tr class="rowRef" data-id="{{ $data->id }}" >
              
                 <td> <i class="fas fa-check"></i> {{ $data->title }}</td>
@@ -48,7 +48,7 @@
           <tr>
             <td colspan="8" class="bug"> <span style="color:white;">Bug</span> </td>
           </tr>
-            @foreach($links as $data)
+            @foreach($tasks as $data)
             <tr class="rowRef" data-id="{{ $data->id }}" >
                 <td> <i class="fas fa-times"></i>  {{ $data->title }}</td>
                 <td>{{ $data->category }}</td>
@@ -62,7 +62,7 @@
           <tr>
             <td colspan="8" class="qa background">QA</td>
           </tr>
-          @foreach($links as $data)
+          @foreach($tasks as $data)
           <tr class="rowRef" data-id="{{ $data->id }}" >
               <td> <i class="fab fa-searchengin text-info"></i> {{ $data->title }}</td>
               <td>{{ $data->category }}</td>
@@ -76,7 +76,7 @@
             <tr>
               <td colspan="8" class="in-progress background"> <span style="color:white;"> Progress </span> </td>
             </tr>
-            @foreach($links as $data)
+            @foreach($tasks as $data)
             <tr class="rowRef" data-id="{{ $data->id }}" >
                 <td> <i class="fas fa-wrench text-warning"></i> {{ $data->title }}</td>
                 <td>{{ $data->category }}</td>
@@ -123,7 +123,7 @@ function updatePosition() {
   $.ajax({
     type: "POST", 
     dataType: "json", 
-    url: "{{ url('links/sortabledatatable') }}",
+    url: "{{ url('sprint/sortabledatatable') }}",
     data: {
       order:order,
       _token: '{{csrf_token()}}'

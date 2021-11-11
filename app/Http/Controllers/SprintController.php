@@ -10,23 +10,23 @@ class SprintController extends Controller
 {
     public function index()
     {
-        $links =  Link::orderBy('sort_id','ASC')->get();
-        //dd($links->toArray());
-        return view('sprint', compact('links'));
+        $tasks =  Link::orderBy('sort_id','ASC')->get();
+        //dd($tasks->toArray());
+        return view('sprint', compact('tasks'));
     }
 
     public function updateItems(Request $request)
     {
-        $links = Link::all();
+        $tasks = Link::all();
         
-        foreach ($links as $link) {
-            $link->timestamps = false; // To disable update_at field updation
-            $id = $link->id;
+        foreach ($tasks as $task) {
+            $task->timestamps = false; // To disable update_at field updation
+            $id = $task->id;
            
             foreach ($request->order as $order) {
                 
                 if ($order['id'] == $id) {
-                    $link->update(['sort_id' => $order['sort_id']]);
+                    $task->update(['sort_id' => $order['sort_id']]);
                 }
             }
         }
