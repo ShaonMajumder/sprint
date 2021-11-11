@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\SprintController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
-Route::get('/sprint', [App\Http\Controllers\LinkController::class, 'index'])->name('sprint');
+Route::get('/sprint', [App\Http\Controllers\SprintController::class, 'index'])->name('sprint');
 
 
 Route::post('links/sortabledatatable', [App\Http\Controllers\LinkController::class, 'updateItems'])->name('links_update');
