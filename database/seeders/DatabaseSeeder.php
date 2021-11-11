@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
             "password" => $default_password
         ]);
 
-        Link::factory(10)->create();
+        Link::factory(5)->create();
     }
 }

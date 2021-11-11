@@ -19,7 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
@@ -42,7 +43,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 
+    <style>
+        .bug{
+            background-color:#D35352;
+        }
 
+        .status-category-box{
+          background: rgb(107, 201, 80) none repeat scroll 0% 0%;
+          color: white;
+          padding: 2;
+        }
+      
+        .open {
+          background-color: #C1CEAD;
+        }
+        .bug {
+          background-color:#D35352;
+        }
+
+        .bug + .background{
+          background-color:#D35352;
+          
+         
+        }
+        
+
+        .in-progress {
+          background-color:#D6D46A;
+        }
+        .qa{
+          background-color: #5d7db8;
+        }
+        .done{
+          background-color: #52B67C;
+        }
+      
+     
+      </style>
 </head>
 <body>
     <div id="app">

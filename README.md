@@ -237,11 +237,7 @@ Unable to create lockable file:
 set .env 
 
 
-npm install datatables.net-bs4
-resource/js/app.js >
-import 'datatables.net-bs4';
-npm run watch
-npm install jquery
+
 
 ## About Laravel
 
