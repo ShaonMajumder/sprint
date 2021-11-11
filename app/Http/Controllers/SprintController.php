@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Sprint;
 use Illuminate\Http\Request;
-use App\Models\Link;
 
 class SprintController extends Controller
 {
     public function index()
     {
-        $tasks =  Link::orderBy('sort_id','ASC')->get();
+        $tasks =  Sprint::orderBy('sort_id','ASC')->get();
         //dd($tasks->toArray());
         return view('sprint', compact('tasks'));
     }
 
     public function updateItems(Request $request)
     {
-        $tasks = Link::all();
+        $tasks = Sprint::all();
         
         foreach ($tasks as $task) {
             $task->timestamps = false; // To disable update_at field updation
