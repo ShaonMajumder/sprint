@@ -22,7 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
-Route::get('/links', [App\Http\Controllers\LinkController::class, 'index'])->name('links');
 Route::get('/sprint', [App\Http\Controllers\LinkController::class, 'index'])->name('sprint');
 
 
