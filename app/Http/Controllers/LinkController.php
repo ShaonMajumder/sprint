@@ -24,23 +24,23 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links =  Link::paginate(5);
-        return view('links', [
-            'links' => $links
-        ]);
+        $links =  Link::orderBy('sort_id','ASC')->get();
+        //dd($links->toArray());
+        return view('links', compact('links'));
     }
 
     public function updateItems(Request $request)
     {
         $links = Link::all();
-
+        
         foreach ($links as $link) {
             $link->timestamps = false; // To disable update_at field updation
             $id = $link->id;
-
+           
             foreach ($request->order as $order) {
+                
                 if ($order['id'] == $id) {
-                    $link->update(['sort_id' => $order['position']]);
+                    $link->update(['sort_id' => $order['sort_id']]);
                 }
             }
         }

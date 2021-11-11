@@ -15,7 +15,7 @@ class CreateLinksTable extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->integer('sort_id')->nullable();
+            $table->integer('sort_id')->unsigned()->default(0);
             $table->string('title');
             $table->string('category');
             $table->string('description');
