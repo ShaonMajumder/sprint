@@ -21,28 +21,7 @@
 
     
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 
-    
-
-
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="//cdn.datatables.net/v/dt/dt-1.10.12/datatables.min.js"></script>
-<script>
-  
-    $("#table").DataTable();
-
-   
-        
-        $('#tablecontents').sortable();
-$('#tablecontents').on('sortupdate',function(){
-   console.log('update called');
-});
-$('#tablecontents').trigger('sortupdate'); // logs update called.
-
- 
-
-</script>
 
 </head>
 <body>

@@ -25,6 +25,7 @@ Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->nam
 Route::get('/links', [App\Http\Controllers\LinkController::class, 'index'])->name('links');
 //Route::get('demos/sortabledatatable','DemoController@showDatatable');
 Route::post('links/sortabledatatable', [App\Http\Controllers\LinkController::class, 'updateItems'])->name('links_update');
+Route::post('links/sortabledatatable2', [App\Http\Controllers\LinkController::class, 'updateItems'])->name('links_update2');
 
 
 //Route::get('/', 'ItemController@itemView');
