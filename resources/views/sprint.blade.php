@@ -8,20 +8,22 @@
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
         <thead>
             <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Category</th>
-                <th scope="col">Description</th>
-                <th scope="col">URL</th>
+              <th scope="col">Icon</th>
+              <th scope="col">Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Description</th>
+              <th scope="col">URL</th>
             </tr>
         </thead>
-        <tbody class="tablecontents">
+        <tbody class="tablecontents" category="open">
           @foreach($tasks as $data)
             @if($data->category != "tablecontents-done" && $data->category != "tablecontents-bug" && $data->category != "tablecontents-qa" && $data->category != "tablecontents-progress") 
-              <tr class="rowRef" data-id="{{ $data->id }}" >
-                  <td>{{ $data->title }}</td>
-                  <td>{{ $data->category }}</td>
-                  <td>{{ $data->description }}</td>
-                  <td>{{ $data->url }}</td>
+              <tr class="rowRef" category="open" data-id="{{ $data->id }}" >
+                <td class="icon"></td>
+                <td>{{ $data->title }}</td>
+                <td>{{ $data->category }}</td>
+                <td>{{ $data->description }}</td>
+                <td>{{ $data->url }}</td>
               </tr>
             @endif
             
@@ -29,16 +31,17 @@
             
         </tbody>
 
-        <tbody id="tablecontents-done" class="tablecontents">
+        <tbody id="tablecontents-done" class="tablecontents" category="done">
           <tr>
             
               <td colspan="8" class="done status" >  <span style="color:white;">Done</span>  </td>
               
           </tr>
             @foreach($tasks as $data)
-              @if ($data->category == "tablecontents-done" )
-                <tr class="rowRef" data-id="{{ $data->id }}" >
-                    <td> <i class="fas fa-check"></i> {{ $data->title }}</td>
+              @if ($data->category == "done" )
+                <tr class="rowRef" category="done" data-id="{{ $data->id }}" >
+                    <td class="icon"><i class="fas fa-check"></i></td>
+                    <td>{{ $data->title }}</td>
                     <td>{{ $data->category }}</td>
                     <td>{{ $data->description }}</td>
                     <td>{{ $data->url }}</td>
@@ -47,30 +50,32 @@
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-bug" class="tablecontents">
+        <tbody id="tablecontents-bug" class="tablecontents" category="bug">
           <tr>
             <td colspan="8" class="bug status"> <span style="color:white;">Bug</span> </td>
           </tr>
             @foreach($tasks as $data)
-              @if ($data->category == "tablecontents-bug" )
-                <tr class="rowRef" data-id="{{ $data->id }}" >
-                    <td> <i class="fas fa-times"></i>  {{ $data->title }}</td>
-                    <td>{{ $data->category }}</td>
-                    <td>{{ $data->description }}</td>
-                    <td>{{ $data->url }}</td>
+              @if ($data->category == "bug" )
+                <tr class="rowRef" category="bug" data-id="{{ $data->id }}" >
+                  <td class="icon"> <i class="fas fa-times"></i> </td>
+                  <td>{{ $data->title }}</td>
+                  <td>{{ $data->category }}</td>
+                  <td>{{ $data->description }}</td>
+                  <td>{{ $data->url }}</td>
                 </tr>
               @endif
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-qa" class="tablecontents">
+        <tbody id="tablecontents-qa" class="tablecontents" category="qa">
           <tr>
             <td colspan="8" class="qa background status">QA</td>
           </tr>
           @foreach($tasks as $data)
-            @if ($data->category == "tablecontents-qa" )
-              <tr class="rowRef" data-id="{{ $data->id }}" >
-                  <td> <i class="fab fa-searchengin text-info"></i> {{ $data->title }}</td>
+            @if ($data->category == "qa" )
+              <tr class="rowRef" category="qa" data-id="{{ $data->id }}" >
+                <td class="icon"><i class="fab fa-searchengin text-info"></i></td>
+                  <td>{{ $data->title }}</td>
                   <td>{{ $data->category }}</td>
                   <td>{{ $data->description }}</td>
                   <td>{{ $data->url }}</td>
@@ -79,14 +84,15 @@
           @endforeach
       </tbody>
 
-        <tbody id="tablecontents-progress" class="tablecontents">
+        <tbody id="tablecontents-progress" class="tablecontents" category="progress">
             <tr>
               <td colspan="8" class="in-progress background status"> <span style="color:white;"> Progress </span> </td>
             </tr>
             @foreach($tasks as $data)
-              @if ($data->category == "tablecontents-progress" )
-                <tr class="rowRef" data-id="{{ $data->id }}" >
-                  <td> <i class="fas fa-wrench text-warning"></i> {{ $data->title }}</td>
+              @if ($data->category == "progress" )
+                <tr class="rowRef" category="progress" data-id="{{ $data->id }}" >
+                  <td class="icon"><i class="fas fa-wrench text-warning"></i></td>
+                  <td>{{ $data->title }}</td>
                   <td>{{ $data->category }}</td>
                   <td>{{ $data->description }}</td>
                   <td>{{ $data->url }}</td>
@@ -131,11 +137,12 @@ $(document).ready(function () {
     
     if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
         
-
-        console.log(  event.target.closest('tr').className );
-        var data_id = event.target.closest('tr').getAttribute('data-id');
-       var fromCategory = event.target.closest('tr').closest('tbody').id; //this.id;
-
+      var data_id = event.target.closest('tr').getAttribute('data-id');
+      var fromCategory = event.target.closest('tr').closest('tbody').getAttribute('category');
+      var Vcategory = event.target.closest('tr').getAttribute('category');
+        
+       
+      
        if(data_id == 'undefined'){
          alert('undefined');
        }
@@ -147,10 +154,19 @@ $(document).ready(function () {
           console.log(' Deleted '+ keepHtml);
           $('.rowRef[data-id="'+ data_id +'"]').remove();
           console.log('this is data-id '+data_id);
-          $('<tr class="rowRef" data-id="'+data_id+'">'+keepHtml+'</tr>').appendTo("#table #"+droppedInto);
+
+           
+          
+          $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+keepHtml+'</tr>').appendTo('#table .tablecontents[category="'+ droppedInto +'"]');
+
+          $('#tablecontents-done .rowRef .icon').html('<i class="fas fa-check"></i>');
+          $('#tablecontents-bug .rowRef .icon').html('<i class="fas fa-times"></i>');
+          $('#tablecontents-qa .rowRef .icon').html('<i class="fab fa-searchengin text-info"></i>');
+          $('#tablecontents-progress .rowRef .icon').html('<i class="fas fa-wrench text-warning"></i>');
 
 
-
+          
+          
 
           $.ajax({
             type: "POST", 
@@ -185,8 +201,8 @@ $(document).ready(function () {
 
   $( ".tablecontents" ).droppable({
     drop: function( event, ui ) {
-      droppedInto = this.id;
-      //alert(droppedInto);
+      droppedInto = this.getAttribute('category');
+      alert(droppedInto);
       droppedAfter();
       updatePosition();
       //populateTable();
