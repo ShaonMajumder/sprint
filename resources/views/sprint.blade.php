@@ -110,44 +110,43 @@ $(document).ready(function () {
       var a = $(this).parent();
       
       
-      if(event.target.tagName == 'TD'){
+      
         
         
-        if(event.target.closest('tr').className.includes('rowRef')){
-          alert('rowref');
+        if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
+          
+          var data_id = event.target.closest('tr').getAttribute('data-id');
+          var fromCategory = this.id;
+          
+          if( fromCategory != droppedInto && data_id !== null && droppedInto !== null ){
+          
+
+            $.ajax({
+              type: "POST", 
+              dataType: "json", 
+              url: "{{ url('sprint/categoryUpdate') }}",
+              data: {
+                id: data_id,
+                category: droppedInto,
+                _token: '{{csrf_token()}}'
+              },
+              success: function(response) {
+                  if (response.status == "success") {
+                    console.log(response);
+                  } else {
+                    console.log(response);
+                  }
+              }
+            });
+
+            data_id = null;
+            droppedInto = null;
+          }
           
         }
-      }
-
-      var data_id = event.target.closest('tr').getAttribute('data-id');
-      var fromCategory = this.id; //$(this).attr('id');
+      
 
       
-      //alert($(this).attr('data-id'));
-      if( fromCategory != droppedInto && data_id !== null && droppedInto !== null ){
-        alert('different');
-
-        $.ajax({
-          type: "POST", 
-          dataType: "json", 
-          url: "{{ url('sprint/categoryUpdate') }}",
-          data: {
-            id: data_id,
-            category: droppedInto,
-            _token: '{{csrf_token()}}'
-          },
-          success: function(response) {
-              if (response.status == "success") {
-                console.log(response);
-              } else {
-                console.log(response);
-              }
-          }
-        });
-
-        data_id = null;
-        droppedInto = null;
-      }
         updatePosition();
     }
     
