@@ -43,4 +43,17 @@ class SprintController extends Controller
         
         return response('Update Successfully.', 200);
     }
+
+    public function updateCategory(Request $request)
+    {
+
+
+        Sprint::where('id', $request->id)
+                ->update(['category' => $request->category]);
+        
+        return response('Update Category Successfully.', 200);
+    }
+
+
+
 }

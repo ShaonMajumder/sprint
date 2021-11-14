@@ -26,6 +26,7 @@ Route::get('/sprint', [App\Http\Controllers\SprintController::class, 'index'])->
 Route::get('/drag', [App\Http\Controllers\SprintController::class, 'drag'])->name('sprint');
 
 Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updateItems'])->name('links_update');
+Route::post('sprint/categoryUpdate', [App\Http\Controllers\SprintController::class, 'updateCategory'])->name('links_update');
 
 
 
