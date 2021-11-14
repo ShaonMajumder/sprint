@@ -14,6 +14,14 @@ class SprintController extends Controller
         return view('sprint', compact('tasks'));
     }
 
+    public function drag()
+    {
+        $tasks =  Sprint::orderBy('sort_id','ASC')->get();
+        //dd($tasks->toArray());
+        return view('drag_and_drop', compact('tasks'));
+        
+    }
+
     public function updateItems(Request $request)
     {
         $tasks = Sprint::all();
@@ -25,7 +33,10 @@ class SprintController extends Controller
             foreach ($request->order as $order) {
                 
                 if ($order['id'] == $id) {
-                    $task->update(['sort_id' => $order['sort_id']]);
+                    $task->update([
+                        'sort_id' => $order['sort_id'],
+                        'category' => $order['category']
+                    ]);
                 }
             }
         }

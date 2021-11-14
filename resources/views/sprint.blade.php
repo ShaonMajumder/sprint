@@ -14,75 +14,74 @@
                 <th scope="col">URL</th>
             </tr>
         </thead>
-        <tbody id="tablecontents" >
+        <tbody>
           
-            @foreach($tasks as $data)
-            <tr class="rowRef" data-id="{{ $data->id }}" >
-             
-                <td>{{ $data->title }}</td>
-                <td>{{ $data->category }}</td>
-                <td>{{ $data->description }}</td>
-                <td>{{ $data->url }}</td>
-            </tr>
-            @endforeach
+            
         </tbody>
 
-        <tbody id="tablecontents-done" >
+        <tbody id="tablecontents-done" class="tablecontents">
           <tr>
             
-              <td colspan="8" class="done" >  <span style="color:white;">Done</span>  </td>
+              <td colspan="8" class="done status" >  <span style="color:white;">Done</span>  </td>
               
           </tr>
             @foreach($tasks as $data)
-            <tr class="rowRef" data-id="{{ $data->id }}" >
-             
-                <td> <i class="fas fa-check"></i> {{ $data->title }}</td>
-                <td>{{ $data->category }}</td>
-                <td>{{ $data->description }}</td>
-                <td>{{ $data->url }}</td>
-            </tr>
+              @if ($data->category == "tablecontents-done" )
+                <tr class="rowRef" data-id="{{ $data->id }}" >
+                    <td> <i class="fas fa-check"></i> {{ $data->title }}</td>
+                    <td>{{ $data->category }}</td>
+                    <td>{{ $data->description }}</td>
+                    <td>{{ $data->url }}</td>
+                </tr>
+              @endif
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-bug" >
+        <tbody id="tablecontents-bug" class="tablecontents">
           <tr>
-            <td colspan="8" class="bug"> <span style="color:white;">Bug</span> </td>
+            <td colspan="8" class="bug status"> <span style="color:white;">Bug</span> </td>
           </tr>
             @foreach($tasks as $data)
-            <tr class="rowRef" data-id="{{ $data->id }}" >
-                <td> <i class="fas fa-times"></i>  {{ $data->title }}</td>
-                <td>{{ $data->category }}</td>
-                <td>{{ $data->description }}</td>
-                <td>{{ $data->url }}</td>
-            </tr>
+              @if ($data->category == "tablecontents-bug" )
+                <tr class="rowRef" data-id="{{ $data->id }}" >
+                    <td> <i class="fas fa-times"></i>  {{ $data->title }}</td>
+                    <td>{{ $data->category }}</td>
+                    <td>{{ $data->description }}</td>
+                    <td>{{ $data->url }}</td>
+                </tr>
+              @endif
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-qa" >
+        <tbody id="tablecontents-qa" class="tablecontents">
           <tr>
-            <td colspan="8" class="qa background">QA</td>
+            <td colspan="8" class="qa background status">QA</td>
           </tr>
           @foreach($tasks as $data)
-          <tr class="rowRef" data-id="{{ $data->id }}" >
-              <td> <i class="fab fa-searchengin text-info"></i> {{ $data->title }}</td>
-              <td>{{ $data->category }}</td>
-              <td>{{ $data->description }}</td>
-              <td>{{ $data->url }}</td>
-          </tr>
+            @if ($data->category == "tablecontents-qa" )
+              <tr class="rowRef" data-id="{{ $data->id }}" >
+                  <td> <i class="fab fa-searchengin text-info"></i> {{ $data->title }}</td>
+                  <td>{{ $data->category }}</td>
+                  <td>{{ $data->description }}</td>
+                  <td>{{ $data->url }}</td>
+              </tr>
+            @endif
           @endforeach
       </tbody>
 
-        <tbody id="tablecontents-progress" >
+        <tbody id="tablecontents-progress" class="tablecontents">
             <tr>
-              <td colspan="8" class="in-progress background"> <span style="color:white;"> Progress </span> </td>
+              <td colspan="8" class="in-progress background status"> <span style="color:white;"> Progress </span> </td>
             </tr>
             @foreach($tasks as $data)
-            <tr class="rowRef" data-id="{{ $data->id }}" >
-                <td> <i class="fas fa-wrench text-warning"></i> {{ $data->title }}</td>
-                <td>{{ $data->category }}</td>
-                <td>{{ $data->description }}</td>
-                <td>{{ $data->url }}</td>
-            </tr>
+              @if ($data->category == "tablecontents-progress" )
+                <tr class="rowRef" data-id="{{ $data->id }}" >
+                  <td> <i class="fas fa-wrench text-warning"></i> {{ $data->title }}</td>
+                  <td>{{ $data->category }}</td>
+                  <td>{{ $data->description }}</td>
+                  <td>{{ $data->url }}</td>
+                </tr>
+              @endif
             @endforeach
         </tbody>
       </table>
@@ -97,28 +96,58 @@
 <script>
 $(document).ready(function () {
 
+  var droppedInto;
+
   $("#table").dataTable({
     "order": []
   });
 
-  $( "#tablecontents" ).sortable({
+  $( ".tablecontents" ).sortable({
     items: "tr",
     cursor: 'move',
     opacity: 0.6,
     update: function() {
+      var a = $(this).parent();
+      
+      
+      var fromCategory = this.id; //$(this).attr('id');
+      //alert(fromCategory);
+      //alert(droppedInto);
+      //alert($(this).attr('data-id'));
+      if( fromCategory != droppedInto){
+        alert('different');
+      }
         updatePosition();
     }
+    
   });
+
+  $( ".tablecontents" ).droppable({
+      drop: function( event, ui ) {
+       
+       droppedInto = this.id;
+      }
+    });
 
 function updatePosition() {
 
   var order = [];
   $('tr.rowRef').each(function(index,element) {
-    order.push({
-      id: $(this).attr('data-id'),
-      sort_id: index+1
-    });
+    //alert(this.parentElement.nodeName);
+    //alert(this.parentNode.id);
+    //alert(index);
+    //alert($(this).closest('.status').attr('id')  );
+    if(this.parentNode.id != ''){
+      order.push({
+        id: $(this).attr('data-id'),
+        category: this.parentNode.id,
+        sort_id: index+1
+      });
+    }
+    
   });
+
+ 
 
   $.ajax({
     type: "POST", 
@@ -136,6 +165,8 @@ function updatePosition() {
         }
     }
   });
+
+  
 
 }
 

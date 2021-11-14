@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
 Route::get('/sprint', [App\Http\Controllers\SprintController::class, 'index'])->name('sprint');
-
+Route::get('/drag', [App\Http\Controllers\SprintController::class, 'drag'])->name('sprint');
 
 Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updateItems'])->name('links_update');
 
