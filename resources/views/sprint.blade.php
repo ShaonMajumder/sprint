@@ -129,7 +129,8 @@ $(document).ready(function () {
           var fromCategory = this.id;
           
           if( fromCategory != droppedInto && data_id !== null && droppedInto !== null ){
-          
+            $('.rowRef[data-id="'+ data_id +'"]').remove();
+
 
             $.ajax({
               type: "POST", 
@@ -165,15 +166,12 @@ $(document).ready(function () {
         
         $.getJSON("{{ url('sprint/populate') }}", function (data) {
             json_obj = data;
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
 
             data.forEach((item) => {
 
 
-              console.log('ID: ' + item.id);
-              console.log('MSG: ' + item.category);
-              console.log('TID: ' + item.description);
-              console.log('FROMWHO: ' + item.url);
+            
 
 
               if( item.category ==  "tablecontents-done" ) {
@@ -260,7 +258,7 @@ function updatePosition() {
     
   });
 
-  alert(order);
+  // /alert(order);
 
  
 
