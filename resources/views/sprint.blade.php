@@ -167,6 +167,10 @@ $(document).ready(function () {
         $.getJSON("{{ url('sprint/populate') }}", function (data) {
             json_obj = data;
             //alert(JSON.stringify(data));
+            $("#table #tablecontents-bug .rowRef").remove();
+            $("#table #tablecontents-qa .rowRef").remove();
+            $("#table #tablecontents-progress .rowRef").remove();
+            $("#table #tablecontents-done .rowRef").remove();
 
             data.forEach((item) => {
 
