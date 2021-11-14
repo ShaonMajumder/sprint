@@ -117,134 +117,72 @@ $(document).ready(function () {
     cursor: 'move',
     opacity: 0.6,
     update: function() {
-      var a = $(this).parent();
-      
-      
-      
-        
-        
-        if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
-          
-          var data_id = event.target.closest('tr').getAttribute('data-id');
-          var fromCategory = this.id;
-          
-          if( fromCategory != droppedInto && data_id !== null && droppedInto !== null ){
-            $('.rowRef[data-id="'+ data_id +'"]').remove();
-
-
-            $.ajax({
-              type: "POST", 
-              dataType: "json", 
-              url: "{{ url('sprint/categoryUpdate') }}",
-              data: {
-                id: data_id,
-                category: droppedInto,
-                _token: '{{csrf_token()}}'
-              },
-              success: function(response) {
-                  if (response.status == "success") {
-                    console.log(response);
-                  } else {
-                    console.log(response);
-                  }
-              }
-            });
-
-            data_id = null;
-            droppedInto = null;
-            
-            
-          }
-          
-        }
-      
-
       
         updatePosition();
-
-
-        
-        $.getJSON("{{ url('sprint/populate') }}", function (data) {
-            json_obj = data;
-            //alert(JSON.stringify(data));
-            $("#table #tablecontents-bug .rowRef").remove();
-            $("#table #tablecontents-qa .rowRef").remove();
-            $("#table #tablecontents-progress .rowRef").remove();
-            $("#table #tablecontents-done .rowRef").remove();
-
-            data.forEach((item) => {
-
-
-            
-
-
-              if( item.category ==  "tablecontents-done" ) {
-
-                  
-                $('<tr class="rowRef" data-id="'+item.id+'">'+
-                  '<td> <i class="fas fa-check"></i>  '+item.title+'</td>'+
-                  '<td>'+item.category+'</td>'+
-                  '<td>'+item.description+'</td>'+
-                  '<td>'+item.url+'</td>'+
-                '</tr>').appendTo("#table #"+item.category);
-
-              }else if( item.category ==  "tablecontents-bug" ) {
-                $('<tr class="rowRef" data-id="'+item.id+'">'+
-                  '<td> <i class="fas fa-times"></i> '+item.title+'</td>'+
-                  '<td>'+item.category+'</td>'+
-                  '<td>'+item.description+'</td>'+
-                  '<td>'+item.url+'</td>'+
-                '</tr>').appendTo("#table #"+item.category);
-
-              }else if( item.category ==  "tablecontents-qa" ) {
-                $('<tr class="rowRef" data-id="'+item.id+'">'+
-                  '<td> <i class="fab fa-searchengin text-info"></i> '+item.title+'</td>'+
-                  '<td>'+item.category+'</td>'+
-                  '<td>'+item.description+'</td>'+
-                  '<td>'+item.url+'</td>'+
-                '</tr>').appendTo("#table #"+item.category);
-
-              }else if( item.category ==  "tablecontents-progress" ) {
-                $('<tr class="rowRef" data-id="'+item.id+'">'+
-                  '<td> <i class="fas fa-wrench text-warning"></i> '+item.title+'</td>'+
-                  '<td>'+item.category+'</td>'+
-                  '<td>'+item.description+'</td>'+
-                  '<td>'+item.url+'</td>'+
-                '</tr>').appendTo("#table #"+item.category);
-
-              }
-
-              
-              
-             
-
-
-
-
-
-
-
-
-            });
-        });
-            
-
-           
-       
-
-
-
+        populateTable();
 
     }
     
   });
 
-  $( ".tablecontents" ).droppable({
-      drop: function( event, ui ) {
-       
-       droppedInto = this.id;
+
+  function droppedAfter(){
+    
+    if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
+        
+        var data_id = event.target.closest('tr').getAttribute('data-id');
+        var fromCategory = event.target.closest('tr').closest('tbody').id; //this.id;
+
+        console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
+        
+        if( fromCategory != droppedInto && data_id !== null && droppedInto !== null ){
+          var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
+          console.log(' Deleted '+ keepHtml);
+          $('.rowRef[data-id="'+ data_id +'"]').remove();
+          
+          $('<tr class="rowRef" data-id="'+data_id+'">'+keepHtml+'</tr>').appendTo("#table #"+droppedInto);
+
+
+
+
+          $.ajax({
+            type: "POST", 
+            dataType: "json", 
+            url: "{{ url('sprint/categoryUpdate') }}",
+            data: {
+              id: data_id,
+              category: droppedInto,
+              _token: '{{csrf_token()}}'
+            },
+            success: function(response) {
+                if (response.status == "success") {
+                  console.log(response);
+                } else {
+                  console.log(response);
+                }
+            }
+          });
+
+          
+
+          
+
+          data_id = null;
+          droppedInto = null;
+          
+          
+        }
+        
       }
-    });
+  }
+
+  $( ".tablecontents" ).droppable({
+    drop: function( event, ui ) {
+      droppedInto = this.id;
+      alert(droppedInto);
+      droppedAfter();
+    }
+  });
 
 function updatePosition() {
 
@@ -252,6 +190,7 @@ function updatePosition() {
   $('tr.rowRef').each(function(index,element) {
     
     //if(this.parentNode.id != ''){
+      console.log( $(this).attr('data-id') );
       order.push({
         id: $(this).attr('data-id'),
         sort_id: index+1
@@ -285,6 +224,72 @@ function updatePosition() {
 
   
 
+}
+
+
+function populateTable(){
+  $.getJSON("{{ url('sprint/populate') }}", function (data) {
+    json_obj = data;
+    $("#table #tablecontents-bug .rowRef").remove();
+    $("#table #tablecontents-qa .rowRef").remove();
+    $("#table #tablecontents-progress .rowRef").remove();
+    $("#table #tablecontents-done .rowRef").remove();
+
+    data.forEach((item) => {
+
+
+    
+
+
+      if( item.category ==  "tablecontents-done" ) {
+
+          
+        $('<tr class="rowRef" data-id="'+item.id+'">'+
+          '<td> <i class="fas fa-check"></i>  '+item.title+'</td>'+
+          '<td>'+item.category+'</td>'+
+          '<td>'+item.description+'</td>'+
+          '<td>'+item.url+'</td>'+
+        '</tr>').appendTo("#table #"+item.category);
+
+      }else if( item.category ==  "tablecontents-bug" ) {
+        $('<tr class="rowRef" data-id="'+item.id+'">'+
+          '<td> <i class="fas fa-times"></i> '+item.title+'</td>'+
+          '<td>'+item.category+'</td>'+
+          '<td>'+item.description+'</td>'+
+          '<td>'+item.url+'</td>'+
+        '</tr>').appendTo("#table #"+item.category);
+
+      }else if( item.category ==  "tablecontents-qa" ) {
+        $('<tr class="rowRef" data-id="'+item.id+'">'+
+          '<td> <i class="fab fa-searchengin text-info"></i> '+item.title+'</td>'+
+          '<td>'+item.category+'</td>'+
+          '<td>'+item.description+'</td>'+
+          '<td>'+item.url+'</td>'+
+        '</tr>').appendTo("#table #"+item.category);
+
+      }else if( item.category ==  "tablecontents-progress" ) {
+        $('<tr class="rowRef" data-id="'+item.id+'">'+
+          '<td> <i class="fas fa-wrench text-warning"></i> '+item.title+'</td>'+
+          '<td>'+item.category+'</td>'+
+          '<td>'+item.description+'</td>'+
+          '<td>'+item.url+'</td>'+
+        '</tr>').appendTo("#table #"+item.category);
+
+      }
+
+      
+      
+      
+
+
+
+
+
+
+
+
+    });
+  });
 }
 
 });
