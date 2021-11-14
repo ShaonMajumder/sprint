@@ -124,7 +124,7 @@ $(document).ready(function () {
     opacity: 0.6,
     update: function() {
       
-        updatePosition();
+        //updatePosition();
         
         
 
@@ -165,15 +165,25 @@ $(document).ready(function () {
           $('#tablecontents-progress .rowRef .icon').html('<i class="fas fa-wrench text-warning"></i>');
 
 
+          //fr
           
-          
+          var order = [];
+          $('tr.rowRef').each(function(index,element) {
+            if(element.getAttribute('data-id') != null){
+              order.push({
+                id: element.getAttribute('data-id'),
+                sort_id: index+1
+              });
+            }
+          });
 
           $.ajax({
             type: "POST", 
             dataType: "json", 
-            url: "{{ url('sprint/categoryUpdate') }}",
+            url: "{{ url('sprint/sortabledatatable') }}",
             data: {
-              id: data_id,
+              order:order,
+              data_id: data_id,
               category: droppedInto,
               _token: '{{csrf_token()}}'
             },
@@ -204,7 +214,7 @@ $(document).ready(function () {
       droppedInto = this.getAttribute('category');
       alert(droppedInto);
       droppedAfter();
-      updatePosition();
+      //updatePosition();
       //populateTable();
     }
   });
