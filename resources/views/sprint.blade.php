@@ -119,7 +119,7 @@ $(document).ready(function () {
     update: function() {
       
         updatePosition();
-        populateTable();
+        //populateTable();
 
     }
     
@@ -130,8 +130,14 @@ $(document).ready(function () {
     
     if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
         
+
+        console.log(  event.target.closest('tr').className );
         var data_id = event.target.closest('tr').getAttribute('data-id');
-        var fromCategory = event.target.closest('tr').closest('tbody').id; //this.id;
+       var fromCategory = event.target.closest('tr').closest('tbody').id; //this.id;
+
+       if(data_id == 'undefined'){
+         alert('undefined');
+       }
 
         console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
         
@@ -139,7 +145,7 @@ $(document).ready(function () {
           var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
           console.log(' Deleted '+ keepHtml);
           $('.rowRef[data-id="'+ data_id +'"]').remove();
-          
+          console.log('this is data-id '+data_id);
           $('<tr class="rowRef" data-id="'+data_id+'">'+keepHtml+'</tr>').appendTo("#table #"+droppedInto);
 
 
@@ -179,8 +185,10 @@ $(document).ready(function () {
   $( ".tablecontents" ).droppable({
     drop: function( event, ui ) {
       droppedInto = this.id;
-      alert(droppedInto);
+      //alert(droppedInto);
       droppedAfter();
+      updatePosition();
+      //populateTable();
     }
   });
 
@@ -230,15 +238,34 @@ function updatePosition() {
 function populateTable(){
   $.getJSON("{{ url('sprint/populate') }}", function (data) {
     json_obj = data;
+
+    /*
     $("#table #tablecontents-bug .rowRef").remove();
     $("#table #tablecontents-qa .rowRef").remove();
     $("#table #tablecontents-progress .rowRef").remove();
     $("#table #tablecontents-done .rowRef").remove();
+    */
+
+  
+    $('tr.rowRef').each(function(index,element) {
+      
+      
+  
+      order.push({
+        id: $(this).attr('data-id'),
+        sort_id: index+1
+      });
+    
+
+      
+      
+    });
+
 
     data.forEach((item) => {
 
 
-    
+     // if ($("#mydiv").length){  }
 
 
       if( item.category ==  "tablecontents-done" ) {
