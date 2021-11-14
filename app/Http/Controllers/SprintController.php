@@ -35,7 +35,7 @@ class SprintController extends Controller
                 if ($order['id'] == $id) {
                     $task->update([
                         'sort_id' => $order['sort_id'],
-                        'category' => $order['category']
+                        //'category' => $order['category']
                     ]);
                 }
             }
@@ -51,9 +51,25 @@ class SprintController extends Controller
         Sprint::where('id', $request->id)
                 ->update(['category' => $request->category]);
         
+    
+
+        
+
         return response('Update Category Successfully.', 200);
+   
     }
 
+    public function populateRow(){
+        $tasks = Sprint::select('title','category','description','url')
+                        ->orderBy('sort_id','ASC')
+                        ->get()
+                        ->toArray();
+        
+        response()->json(  $tasks );
+        return response()->json($tasks, 200);
+
+    }
+    
 
 
 }

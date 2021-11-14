@@ -14,8 +14,18 @@
                 <th scope="col">URL</th>
             </tr>
         </thead>
-        <tbody>
-          
+        <tbody class="tablecontents">
+          @foreach($tasks as $data)
+            @if($data->category != "tablecontents-done" && $data->category != "tablecontents-bug" && $data->category != "tablecontents-qa" && $data->category != "tablecontents-progress") 
+              <tr class="rowRef" data-id="{{ $data->id }}" >
+                  <td>{{ $data->title }}</td>
+                  <td>{{ $data->category }}</td>
+                  <td>{{ $data->description }}</td>
+                  <td>{{ $data->url }}</td>
+              </tr>
+            @endif
+            
+          @endforeach
             
         </tbody>
 
@@ -141,6 +151,8 @@ $(document).ready(function () {
 
             data_id = null;
             droppedInto = null;
+            
+            
           }
           
         }
@@ -148,6 +160,79 @@ $(document).ready(function () {
 
       
         updatePosition();
+
+
+        
+        $.getJSON("{{ url('sprint/populate') }}", function (data) {
+            json_obj = data;
+            alert(JSON.stringify(data));
+
+            data.forEach((item) => {
+
+
+              console.log('ID: ' + item.id);
+              console.log('MSG: ' + item.category);
+              console.log('TID: ' + item.description);
+              console.log('FROMWHO: ' + item.url);
+
+
+              if( item.category ==  "tablecontents-done" ) {
+
+                  
+                $('<tr class="rowRef" data-id="'+item.id+'">'+
+                  '<td> <i class="fas fa-check"></i>  '+item.title+'</td>'+
+                  '<td>'+item.category+'</td>'+
+                  '<td>'+item.description+'</td>'+
+                  '<td>'+item.url+'</td>'+
+                '</tr>').appendTo("#table #"+item.category);
+
+              }else if( item.category ==  "tablecontents-bug" ) {
+                $('<tr class="rowRef" data-id="'+item.id+'">'+
+                  '<td> <i class="fas fa-times"></i> '+item.title+'</td>'+
+                  '<td>'+item.category+'</td>'+
+                  '<td>'+item.description+'</td>'+
+                  '<td>'+item.url+'</td>'+
+                '</tr>').appendTo("#table #"+item.category);
+
+              }else if( item.category ==  "tablecontents-qa" ) {
+                $('<tr class="rowRef" data-id="'+item.id+'">'+
+                  '<td> <i class="fab fa-searchengin text-info"></i> '+item.title+'</td>'+
+                  '<td>'+item.category+'</td>'+
+                  '<td>'+item.description+'</td>'+
+                  '<td>'+item.url+'</td>'+
+                '</tr>').appendTo("#table #"+item.category);
+
+              }else if( item.category ==  "tablecontents-progress" ) {
+                $('<tr class="rowRef" data-id="'+item.id+'">'+
+                  '<td> <i class="fas fa-wrench text-warning"></i> '+item.title+'</td>'+
+                  '<td>'+item.category+'</td>'+
+                  '<td>'+item.description+'</td>'+
+                  '<td>'+item.url+'</td>'+
+                '</tr>').appendTo("#table #"+item.category);
+
+              }
+
+              
+              
+             
+
+
+
+
+
+
+
+
+            });
+        });
+            
+
+           
+       
+
+
+
+
     }
     
   });
@@ -163,19 +248,19 @@ function updatePosition() {
 
   var order = [];
   $('tr.rowRef').each(function(index,element) {
-    //alert(this.parentElement.nodeName);
-    //alert(this.parentNode.id);
-    //alert(index);
-    //alert($(this).closest('.status').attr('id')  );
-    if(this.parentNode.id != ''){
+    
+    //if(this.parentNode.id != ''){
       order.push({
         id: $(this).attr('data-id'),
-        category: this.parentNode.id,
         sort_id: index+1
       });
-    }
+    //}
+
+    
     
   });
+
+  alert(order);
 
  
 
