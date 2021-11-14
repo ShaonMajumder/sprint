@@ -119,7 +119,8 @@ $(document).ready(function () {
     update: function() {
       
         updatePosition();
-        //populateTable();
+        
+        
 
     }
     
