@@ -8,6 +8,7 @@
       
       <button type="button" class="icon-button qa" data-target="#createTask" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
       @include('layouts.create-task-popup')
+      
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
         <thead>
             <tr>
@@ -112,6 +113,31 @@
 
 <script>
 $(document).ready(function () {
+
+  
+  var tour = new Tour({
+        storage: false
+   });
+
+   tour.addSteps([{
+        element: ".icon-button",
+        placement: "bottom",
+        title: "Welcome to our landing page!",
+        content: "Here is some basic information about this path to this degree program.",
+    //    backdrop: true,
+        backdropPadding: {
+            left: -370,
+            right: -370,
+            bottom: 20
+        },
+      }
+    ]);
+
+  tour.init();
+  tour.start();
+
+
+  
 
   function updateIcons(){
     $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');

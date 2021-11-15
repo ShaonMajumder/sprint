@@ -89,9 +89,22 @@
         #table{
             box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
         }
+
+        .overlay{
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            position: absolute;
+            background-color: black ;
+            opacity: 0;
+            display: none;
+        }
+
+
       </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
