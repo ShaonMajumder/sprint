@@ -14,31 +14,8 @@ class SprintController extends Controller
         return view('sprint', compact('tasks'));
     }
 
-    public function drag()
-    {
-        $tasks =  Sprint::orderBy('sort_id','ASC')->get();
-        //dd($tasks->toArray());
-        return view('drag_and_drop', compact('tasks'));
-        
-    }
-
-    public function updateItems(Request $request)
-    {
-        $this->updatePosition($request);
-        return response('Updated Position Successfully.', 200);
-    }
-
-    /*
-    public function updateCategory(Request $request){
-        Sprint::where('id', $request->data_id)
-                ->update(['category' => $request->category]);
-    }
-    */
-
     public function updatePosition(Request $request)
     {
-
-
         $tasks = Sprint::all();
 
         foreach ($tasks as $task) {
@@ -55,7 +32,6 @@ class SprintController extends Controller
                 }
             }
         }
-        
 
         return response('Updated Postions Successfully.', 200);
    

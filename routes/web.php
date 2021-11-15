@@ -25,7 +25,7 @@ Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->nam
 Route::get('/tasks', [App\Http\Controllers\SprintController::class, 'index'])->name('sprint');
 
 
-Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updateItems'])->name('links_update');
+Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updatePosition'])->name('links_update');
 Route::get('sprint/populate', [App\Http\Controllers\SprintController::class, 'populateRow'])->name('links_update3');
 
 

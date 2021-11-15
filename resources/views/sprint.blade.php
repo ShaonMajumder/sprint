@@ -128,7 +128,7 @@ $(document).ready(function () {
     opacity: 0.6,
     update: function() {
       
-        //updatePosition();
+        updatePosition();
         
         
 
@@ -148,26 +148,20 @@ $(document).ready(function () {
         console.log('undefined data_id');
       }
       console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
-
         
-        
-        if( fromCategory != droppedInto && ( data_id !== null && droppedInto !== null ) ){
-          var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
-          $('.rowRef[data-id="'+ data_id +'"]').remove();
-           
-          
-          $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+
-              keepHtml+
-            '</tr>').appendTo('#table .tablecontents[category="'+ droppedInto +'"]');
-          
-          
-          updateIcons();
-          updatePosition(data_id,droppedInto);
-          data_id = null;
-          droppedInto = null;
-        }
-        
+      if( fromCategory != droppedInto && ( data_id !== null && droppedInto !== null ) ){
+        var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
+        $('.rowRef[data-id="'+ data_id +'"]').remove();
+        $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+
+            keepHtml+
+          '</tr>').appendTo('#table .tablecontents[category="'+ droppedInto +'"]');
+        updateIcons();
+        updatePosition(data_id,droppedInto);
+        data_id = null;
+        droppedInto = null;
       }
+        
+    }
   }
 
   $( ".tablecontents" ).droppable({
@@ -199,8 +193,6 @@ $(document).ready(function () {
       url: "{{ url('sprint/sortabledatatable') }}",
       data: {
         order:order,
-        data_id: data_id,
-        category: droppedInto,
         _token: '{{csrf_token()}}'
       },
       success: function(response) {
@@ -259,20 +251,11 @@ $(document).ready(function () {
 
         }
 
-        
-        
-        
-
-
-
-
-
-
-
-
       });
     });
   }
+
+
 
 });
 </script>
