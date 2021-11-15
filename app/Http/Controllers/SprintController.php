@@ -14,6 +14,24 @@ class SprintController extends Controller
         return view('sprint', compact('tasks'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {   
+        
+        Sprint::insert([
+            'title' => $request->title,
+            'description' => $request->description,
+            'url' => $request->url,
+            'category' => 'open'
+        ]);
+        return response('Created New Task.', 200);
+    }
+
     public function updatePosition(Request $request)
     {
         $tasks = Sprint::all();

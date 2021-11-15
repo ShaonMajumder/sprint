@@ -8,20 +8,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="{{route('new_task')}}" method="post" id="newtaskform">
+          @csrf
+
           <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Title:</label>
-            <input type="text" class="form-control" id="recipient-name">
+            <label for="recipient-name1" class="col-form-label">Title:</label>
+            <input type="text" class="form-control" id="recipient-name1"  name="title">
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Description:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <label for="message-text2" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="message-text2" name="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name2" class="col-form-label">URL:</label>
+            <input type="text" class="form-control" id="recipient-name2"  name="url">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="submit" onclick="addtask();" class="btn btn-primary">Create</button>
       </div>
     </div>
   </div>

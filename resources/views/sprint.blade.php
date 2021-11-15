@@ -114,6 +114,8 @@
 <script>
 $(document).ready(function () {  
 
+  
+
   function updateIcons(){
     $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
     $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');

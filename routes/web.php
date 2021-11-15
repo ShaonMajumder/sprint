@@ -26,8 +26,7 @@ Route::get('/tasks', [App\Http\Controllers\SprintController::class, 'index'])->n
 
 
 Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updatePosition'])->name('links_update');
-Route::get('sprint/populate', [App\Http\Controllers\SprintController::class, 'populateRow'])->name('links_update3');
-
+Route::post('sprint/newtask', [App\Http\Controllers\SprintController::class, 'store'])->name('new_task');
 
 
 
