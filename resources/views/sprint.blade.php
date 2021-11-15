@@ -112,32 +112,7 @@
 
 
 <script>
-$(document).ready(function () {
-
-  
-  var tour = new Tour({
-        storage: false
-   });
-
-   tour.addSteps([{
-        element: ".icon-button",
-        placement: "bottom",
-        title: "Welcome to our landing page!",
-        content: "Here is some basic information about this path to this degree program.",
-    //    backdrop: true,
-        backdropPadding: {
-            left: -370,
-            right: -370,
-            bottom: 20
-        },
-      }
-    ]);
-
-  tour.init();
-  tour.start();
-
-
-  
+$(document).ready(function () {  
 
   function updateIcons(){
     $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
@@ -147,6 +122,36 @@ $(document).ready(function () {
     $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
   }
 
+  function updatePosition(){
+    var order = [];
+    $('tr.rowRef').each(function(index,element) {
+      if(element.getAttribute('data-id') != null){
+        order.push({
+          id: element.getAttribute('data-id'),
+          category: element.getAttribute('category'),
+          sort_id: index+1
+        });
+      }
+    });
+
+    $.ajax({
+      type: "POST", 
+      dataType: "json", 
+      url: "{{ url('sprint/sortabledatatable') }}",
+      data: {
+        order:order,
+        _token: '{{csrf_token()}}'
+      },
+      success: function(response) {
+          if (response.status == "success") {
+            console.log(response);
+          } else {
+            console.log(response);
+          }
+      }
+    });
+  }
+  
   updateIcons();
 
   var droppedInto;
@@ -201,35 +206,7 @@ $(document).ready(function () {
     }
   });
 
-  function updatePosition(){
-    var order = [];
-    $('tr.rowRef').each(function(index,element) {
-      if(element.getAttribute('data-id') != null){
-        order.push({
-          id: element.getAttribute('data-id'),
-          category: element.getAttribute('category'),
-          sort_id: index+1
-        });
-      }
-    });
-
-    $.ajax({
-      type: "POST", 
-      dataType: "json", 
-      url: "{{ url('sprint/sortabledatatable') }}",
-      data: {
-        order:order,
-        _token: '{{csrf_token()}}'
-      },
-      success: function(response) {
-          if (response.status == "success") {
-            console.log(response);
-          } else {
-            console.log(response);
-          }
-      }
-    });
-  }
+  
 
 });
 </script>
