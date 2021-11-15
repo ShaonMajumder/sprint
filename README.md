@@ -28,6 +28,10 @@ vhost forbidden -
 
 check vhost is pointed to corrected folder and hosts file
 
+Permission log - 
+chmod 777 -R storage/
+
+
 **Rewrite mod**
 
 >  sudo a2enmod rewrite

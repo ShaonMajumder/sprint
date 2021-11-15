@@ -5,6 +5,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="table-responsive">
+      <button class="icon-button qa"> <i class="fas fa-plus"></i> Add Task</button>
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
         <thead>
             <tr>
@@ -13,8 +14,14 @@
               <th scope="col">Description</th>
               <th scope="col">URL</th>
             </tr>
+            <tr>
+              <td colspan="8" class="open status" >  <span style="color:white;">Open</span>  </td>
+            </tr>
         </thead>
+        
         <tbody class="tablecontents" dropped-into-category="open">
+          
+          
           @foreach($tasks as $data)
             @if($data->category == "open") 
               <tr class="rowRef" category="open" data-id="{{ $data->id }}" >
@@ -31,9 +38,7 @@
 
         <tbody class="tablecontents" dropped-into-category="done">
           <tr>
-            
               <td colspan="8" class="done status" >  <span style="color:white;">Done</span>  </td>
-              
           </tr>
             @foreach($tasks as $data)
               @if ($data->category == "done" )
