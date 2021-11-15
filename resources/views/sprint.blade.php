@@ -5,7 +5,9 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="table-responsive-md">
-      <button class="icon-button qa"> <i class="fas fa-plus"></i> Add Task</button>
+      
+      <button type="button" class="icon-button qa" data-target="#createTask" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
+      @include('layouts.create-task-popup')
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
         <thead>
             <tr>
