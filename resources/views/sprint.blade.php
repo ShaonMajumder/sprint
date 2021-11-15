@@ -159,10 +159,10 @@ $(document).ready(function () {
           
           $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+keepHtml+'</tr>').appendTo('#table .tablecontents[category="'+ droppedInto +'"]');
 
-          $('#tablecontents-done .rowRef .icon').html('<i class="fas fa-check"></i>');
-          $('#tablecontents-bug .rowRef .icon').html('<i class="fas fa-times"></i>');
-          $('#tablecontents-qa .rowRef .icon').html('<i class="fab fa-searchengin text-info"></i>');
-          $('#tablecontents-progress .rowRef .icon').html('<i class="fas fa-wrench text-warning"></i>');
+          $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');
+          $('.rowRef[category="bug"] .icon').html('<i class="fas fa-times"></i>');
+          $('.rowRef[category="qa"] .icon').html('<i class="fab fa-searchengin text-info"></i>');
+          $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
 
 
           //fr
