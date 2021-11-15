@@ -14,7 +14,7 @@
               <th scope="col">URL</th>
             </tr>
         </thead>
-        <tbody class="tablecontents" category="open" dropped-into-category="open">
+        <tbody class="tablecontents" dropped-into-category="open">
           @foreach($tasks as $data)
             @if($data->category == "open") 
               <tr class="rowRef" category="open" data-id="{{ $data->id }}" >
@@ -29,7 +29,7 @@
             
         </tbody>
 
-        <tbody id="tablecontents-done" class="tablecontents" dropped-into-category="done">
+        <tbody class="tablecontents" dropped-into-category="done">
           <tr>
             
               <td colspan="8" class="done status" >  <span style="color:white;">Done</span>  </td>
@@ -47,7 +47,7 @@
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-bug" class="tablecontents" dropped-into-category="bug">
+        <tbody class="tablecontents" dropped-into-category="bug">
           <tr>
             <td colspan="8" class="bug status"> <span style="color:white;">Bug</span> </td>
           </tr>
@@ -63,7 +63,7 @@
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-qa" class="tablecontents" dropped-into-category="qa">
+        <tbody class="tablecontents" dropped-into-category="qa">
           <tr>
             <td colspan="8" class="qa background status">QA</td>
           </tr>
@@ -79,7 +79,7 @@
           @endforeach
       </tbody>
 
-        <tbody id="tablecontents-progress" class="tablecontents" dropped-into-category="progress">
+        <tbody class="tablecontents" dropped-into-category="progress">
             <tr>
               <td colspan="8" class="in-progress background status"> <span style="color:white;"> Progress </span> </td>
             </tr>
@@ -165,8 +165,6 @@ $(document).ready(function () {
       droppedInto = this.getAttribute('dropped-into-category');
       console.log("Dropped Into " + droppedInto);
       droppedAfter();
-      //updatePosition();
-      //populateTable();
     }
   });
 
