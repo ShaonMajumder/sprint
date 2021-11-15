@@ -198,58 +198,6 @@ $(document).ready(function () {
     });
   }
 
-  function populateTable(){
-    $.getJSON("{{ url('sprint/populate') }}", function (data) {
-      json_obj = data;
-
-      data.forEach((item) => {
-      // if ($("#mydiv").length){  }
-        if( item.category ==  "open" ) {
-          $('<tr class="rowRef" data-id="'+item.id+'" category="open">'+
-            '<td> <i class="fas fa-check"></i>  '+item.title+'</td>'+
-            '<td>'+item.description+'</td>'+
-            '<td>'+item.url+'</td>'+
-          '</tr>').appendTo("#table #"+item.category);
-
-        }else if( item.category ==  "done" ) {
-          $('<tr class="rowRef" data-id="'+item.id+'" category="done">'+
-            '<td> <i class="fas fa-check"></i>  '+item.title+'</td>'+
-            '<td>'+item.description+'</td>'+
-            '<td>'+item.url+'</td>'+
-          '</tr>').appendTo("#table #"+item.category);
-
-        }else if( item.category ==  "bug" ) {
-          $('<tr class="rowRef" data-id="'+item.id+'" category="bug">'+
-            '<td> <i class="fas fa-times"></i> '+item.title+'</td>'+
-            '<td>'+item.category+'</td>'+
-            '<td>'+item.description+'</td>'+
-            '<td>'+item.url+'</td>'+
-          '</tr>').appendTo("#table #"+item.category);
-
-        }else if( item.category ==  "qa" ) {
-          $('<tr class="rowRef" data-id="'+item.id+'" category="qa">'+
-            '<td> <i class="fab fa-searchengin text-info"></i> '+item.title+'</td>'+
-            '<td>'+item.category+'</td>'+
-            '<td>'+item.description+'</td>'+
-            '<td>'+item.url+'</td>'+
-          '</tr>').appendTo("#table #"+item.category);
-
-        }else if( item.category ==  "progress" ) {
-          $('<tr class="rowRef" data-id="'+item.id+'" category="progress">'+
-            '<td> <i class="fas fa-wrench text-warning"></i> '+item.title+'</td>'+
-            '<td>'+item.category+'</td>'+
-            '<td>'+item.description+'</td>'+
-            '<td>'+item.url+'</td>'+
-          '</tr>').appendTo("#table #"+item.category);
-
-        }
-
-      });
-    });
-  }
-
-
-
 });
 </script>
     

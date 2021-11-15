@@ -36,18 +36,4 @@ class SprintController extends Controller
         return response('Updated Postions Successfully.', 200);
    
     }
-
-    public function populateRow(){
-        $tasks = Sprint::select('title','category','description','url')
-                        ->orderBy('sort_id','ASC')
-                        ->get()
-                        ->toArray();
-        
-        response()->json(  $tasks );
-        return response()->json($tasks, 200);
-
-    }
-    
-
-
 }
