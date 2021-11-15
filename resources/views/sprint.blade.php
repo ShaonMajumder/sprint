@@ -14,7 +14,7 @@
               <th scope="col">URL</th>
             </tr>
         </thead>
-        <tbody class="tablecontents" category="open">
+        <tbody class="tablecontents" category="open" dropped-into-category="open">
           @foreach($tasks as $data)
             @if($data->category == "open") 
               <tr class="rowRef" category="open" data-id="{{ $data->id }}" >
@@ -29,7 +29,7 @@
             
         </tbody>
 
-        <tbody id="tablecontents-done" class="tablecontents" category="done">
+        <tbody id="tablecontents-done" class="tablecontents" dropped-into-category="done">
           <tr>
             
               <td colspan="8" class="done status" >  <span style="color:white;">Done</span>  </td>
@@ -47,7 +47,7 @@
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-bug" class="tablecontents" category="bug">
+        <tbody id="tablecontents-bug" class="tablecontents" dropped-into-category="bug">
           <tr>
             <td colspan="8" class="bug status"> <span style="color:white;">Bug</span> </td>
           </tr>
@@ -63,7 +63,7 @@
             @endforeach
         </tbody>
 
-        <tbody id="tablecontents-qa" class="tablecontents" category="qa">
+        <tbody id="tablecontents-qa" class="tablecontents" dropped-into-category="qa">
           <tr>
             <td colspan="8" class="qa background status">QA</td>
           </tr>
@@ -79,7 +79,7 @@
           @endforeach
       </tbody>
 
-        <tbody id="tablecontents-progress" class="tablecontents" category="progress">
+        <tbody id="tablecontents-progress" class="tablecontents" dropped-into-category="progress">
             <tr>
               <td colspan="8" class="in-progress background status"> <span style="color:white;"> Progress </span> </td>
             </tr>
@@ -127,13 +127,8 @@ $(document).ready(function () {
     cursor: 'move',
     opacity: 0.6,
     update: function() {
-      
-        updatePosition();
-        
-        
-
+      updatePosition();
     }
-    
   });
 
 
@@ -142,7 +137,7 @@ $(document).ready(function () {
     if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
         
       var data_id = event.target.closest('tr').getAttribute('data-id');
-      var fromCategory = event.target.closest('tr').closest('tbody').getAttribute('category');
+      var fromCategory = event.target.closest('tbody').getAttribute('dropped-into-category');
 
       if(data_id == 'undefined'){
         console.log('undefined data_id');
@@ -150,13 +145,14 @@ $(document).ready(function () {
       console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
         
       if( fromCategory != droppedInto && ( data_id !== null && droppedInto !== null ) ){
+        
         var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
         $('.rowRef[data-id="'+ data_id +'"]').remove();
         $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+
             keepHtml+
-          '</tr>').appendTo('#table .tablecontents[category="'+ droppedInto +'"]');
+          '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ droppedInto +'"]');
         updateIcons();
-        updatePosition(data_id,droppedInto);
+        updatePosition();
         data_id = null;
         droppedInto = null;
       }
@@ -166,7 +162,7 @@ $(document).ready(function () {
 
   $( ".tablecontents" ).droppable({
     drop: function( event, ui ) {
-      droppedInto = this.getAttribute('category');
+      droppedInto = this.getAttribute('dropped-into-category');
       console.log("Dropped Into " + droppedInto);
       droppedAfter();
       //updatePosition();
@@ -174,8 +170,7 @@ $(document).ready(function () {
     }
   });
 
-  function updatePosition(data_id,droppedInto){
-
+  function updatePosition(){
     var order = [];
     $('tr.rowRef').each(function(index,element) {
       if(element.getAttribute('data-id') != null){
