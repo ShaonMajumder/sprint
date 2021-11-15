@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
             "password" => $default_password
         ]);
 
-        Sprint::factory(10)->create();
+        Sprint::factory(5)->create();
     }
 }

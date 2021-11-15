@@ -24,40 +24,21 @@ class SprintController extends Controller
 
     public function updateItems(Request $request)
     {
-        
-        Sprint::where('id', $request->data_id)
-                ->update(['category' => $request->category]);
-        
-                
-        $tasks = Sprint::all();
-
-        foreach ($tasks as $task) {
-            $task->timestamps = false; // To disable update_at field updation
-            $id = $task->id;
-           
-            foreach ($request->order as $order) {
-                
-                if ($order['id'] == $id) {
-                    $task->update([
-                        'sort_id' => $order['sort_id'],
-                        //'category' => $order['category']
-                    ]);
-                }
-            }
-        }
-        
-
-        return response('Update Category Successfully.', 200);
+        $this->updatePosition($request);
+        return response('Updated Position Successfully.', 200);
     }
 
-    public function updateCategory(Request $request)
+    /*
+    public function updateCategory(Request $request){
+        Sprint::where('id', $request->data_id)
+                ->update(['category' => $request->category]);
+    }
+    */
+
+    public function updatePosition(Request $request)
     {
 
 
-        Sprint::where('id', $request->data_id)
-                ->update(['category' => $request->category]);
-        
-    
         $tasks = Sprint::all();
 
         foreach ($tasks as $task) {
@@ -69,14 +50,14 @@ class SprintController extends Controller
                 if ($order['id'] == $id) {
                     $task->update([
                         'sort_id' => $order['sort_id'],
-                        //'category' => $order['category']
+                        'category' => $order['category']
                     ]);
                 }
             }
         }
         
 
-        return response('Update Category Successfully.', 200);
+        return response('Updated Postions Successfully.', 200);
    
     }
 
