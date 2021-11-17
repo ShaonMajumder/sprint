@@ -130,6 +130,8 @@ $(document).ready(function () {
         '<td>'+data.description+'</td>'+
         '<td>'+data.url+'</td>'+
     '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
+    
+    updatePosition();
     updateIcons();
   }
   
@@ -156,12 +158,6 @@ $(document).ready(function () {
     $("#newtaskForm").trigger("reset");
 
     
-
-    
-    
-    alert('update_postions');
-    updatePosition();
-    updateIcons();
     data_id = null;
   }
 
