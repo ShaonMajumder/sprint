@@ -101,13 +101,13 @@
         }
 
 
-      </style>
+    </style>
 
-      <script>
-        function addtask(){ 
-            $('#newtaskform').submit();
-        }
-      </script>
+    <script>
+        $(document).ready( function(){
+            
+        });
+    </script>
 
 </head>
 <body>

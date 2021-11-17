@@ -6,7 +6,7 @@
   <div class="row justify-content-center">
     <div class="table-responsive-md">
       
-      <button type="button" class="icon-button qa" data-target="#createTask" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
+      <button type="button" class="icon-button qa" data-target="#createTaskModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
       @include('layouts.create-task-popup')
       
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
@@ -112,10 +112,8 @@
 
 
 <script>
-$(document).ready(function () {  
-
   
-
+$(document).ready(function () {  
   function updateIcons(){
     $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
     $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');
@@ -123,6 +121,54 @@ $(document).ready(function () {
     $('.rowRef[category="qa"] .icon').html('<i class="fab fa-searchengin text-info"></i>');
     $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
   }
+  
+  function insertRow(data){
+        
+    $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
+        '<td class="icon"></td>'+
+        '<td>'+data.title+'</td>'+
+        '<td>'+data.description+'</td>'+
+        '<td>'+data.url+'</td>'+
+    '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
+    updateIcons();
+  }
+  
+  function addtask(){
+    const form = document.querySelector('#newtaskForm');
+    const data = Object.fromEntries(new FormData(form).entries());
+    data["category"] = "open";
+    
+    $.ajax({
+        url: "{{ route('new_task') }}",
+        type: 'POST',
+        data: data,
+        datatype: 'json',
+        success: function (data) { 
+            console.log(data); 
+            insertRow(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            
+        }
+    });
+
+    $('#createTaskModal').modal('hide');
+    $("#newtaskForm").trigger("reset");
+
+    
+
+    
+    
+    alert('update_postions');
+    updatePosition();
+    updateIcons();
+    data_id = null;
+  }
+
+  
+  
+        
+  
 
   function updatePosition(){
     var order = [];
@@ -154,7 +200,7 @@ $(document).ready(function () {
     });
   }
   
-  updateIcons();
+  
 
   var droppedInto;
 
@@ -208,7 +254,11 @@ $(document).ready(function () {
     }
   });
 
-  
+
+  updateIcons();
+  $( "#btnNewTaskForm" ).click(function() {
+    addtask();
+  });
 
 });
 </script>

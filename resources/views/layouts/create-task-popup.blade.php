@@ -1,4 +1,6 @@
-<div class="modal fade" id="createTask" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,7 +10,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{route('new_task')}}" method="post" id="newtaskform">
+        <form action="{{ route('new_task') }}" method="post" id="newtaskForm">
           @csrf
 
           <div class="form-group">
@@ -27,8 +29,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" onclick="addtask();" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary" id="btnNewTaskForm">Create</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+</script>

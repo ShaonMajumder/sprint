@@ -23,13 +23,16 @@ class SprintController extends Controller
     public function store(Request $request)
     {   
         
-        Sprint::insert([
+        $newTask = Sprint::create([
             'title' => $request->title,
             'description' => $request->description,
             'url' => $request->url,
             'category' => 'open'
         ]);
-        return response('Created New Task.', 200);
+        
+
+        $dataArray = $newTask->toArray();
+        return response()->json( $dataArray , 200);
     }
 
     public function updatePosition(Request $request)
