@@ -35,27 +35,32 @@ class DatabaseSeeder extends Seeder
         Category::factory()->create([
             "name" => "open",
             "sort_id" => 0,
-            "icon" => '<i class="fas fa-folder-open"></i>'
+            "icon" => '<i class="fas fa-folder-open"></i>',
+            "color" => '#C1CEAD'
         ]);
         Category::factory()->create([
             "name" => 'done',
             "sort_id" => 1,
-            "icon" => '<i class="fas fa-check"></i>'
+            "icon" => '<i class="fas fa-check"></i>',
+            "color" => '#52B67C'
         ]);
         Category::factory()->create([
             "name" => 'bug',
             "sort_id" => 2,
-            "icon" => '<i class="fas fa-times"></i>'
+            "icon" => '<i class="fas fa-times"></i>',
+            "color" => '#D35352'
         ]);
         Category::factory()->create([
             "name" => 'qa',
             "sort_id" => 3,
-            "icon" => '<i class="fab fa-searchengin"></i>'
+            "icon" => '<i class="fab fa-searchengin"></i>',
+            "color" => '#5d7db8'
         ]);
         Category::factory()->create([
             "name" => 'progress',
             "sort_id" => 4,
-            "icon" => '<i class="fas fa-wrench"></i>'
+            "icon" => '<i class="fas fa-wrench"></i>',
+            "color" => '#D6D46A'
         ]);
 
         

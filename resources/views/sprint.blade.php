@@ -7,7 +7,9 @@
     <div class="table-responsive-md">
       
       <button type="button" class="icon-button qa" data-target="#createTaskModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
+      <button type="button" class="icon-button qa" data-target="#createCategoryModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Category</button>
       @include('layouts.create-task-popup')
+      @include('layouts.create-category-popup')
       
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
         <thead>
@@ -89,7 +91,7 @@
 
         <tbody class="tablecontents" dropped-into-category="progress">
             <tr>
-              <td colspan="8" class="in-progress background status"> <span style="color:white;"> Progress </span> </td>
+              <td colspan="8" class="progress background status"> <span style="color:white;"> Progress </span> </td>
             </tr>
             @foreach($tasks as $data)
               @if ($data->category == "progress" )
@@ -108,11 +110,22 @@
   </div>
       
 </div>
+    
+@endsection
 
+@section('top-head-css')
+    <style>
+    @foreach($categories as $catogory)
+        .{{ $catogory->name }} {
+        background-color: {{$catogory->color}};
+        }
+    @endforeach
 
+    </style>
+@endsection
 
+@section('top-head-js')
 <script>
- 
 
   var categories = {
     value: '',
@@ -181,8 +194,32 @@ $(document).ready(function () {
     updateIcons();
   }
   
-  function addCategory(){
 
+
+
+  function addCategory(){
+    const form = document.querySelector('#newCategoryForm');
+    const data = Object.fromEntries(new FormData(form).entries());
+    
+    
+    $.ajax({
+        url: "{{ route('new_category') }}",
+        type: 'POST',
+        data: data,
+        datatype: 'json',
+        success: function (data) { 
+            insertRow(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            
+        }
+    });
+
+    $('#createTaskModal').modal('hide');
+    $("#newtaskForm").trigger("reset");
+
+    
+    data_id = null;
   }
 
   function addtask(){
@@ -308,5 +345,4 @@ $(document).ready(function () {
 
 });
 </script>
-    
 @endsection

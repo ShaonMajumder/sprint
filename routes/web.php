@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SprintController;
+use App\Models\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +31,7 @@ Route::get('/tasks', [SprintController::class, 'index'])->name('sprint');
 Route::post('sprint/sortabledatatable', [SprintController::class, 'updatePosition'])->name('links_update');
 Route::post('sprint/getCategories', [SprintController::class, 'getCategories'])->name('getCategories');
 Route::post('sprint/newtask', [SprintController::class, 'store'])->name('new_task');
+Route::post('sprint/newCategory', [Category::class, 'store'])->name('new_category');
 
 
 

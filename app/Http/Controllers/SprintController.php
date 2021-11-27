@@ -11,8 +11,8 @@ class SprintController extends Controller
     public function index()
     {
         $tasks =  Sprint::orderBy('sort_id','ASC')->get();
-        //dd($tasks->toArray());
-        return view('sprint', compact('tasks'));
+        $categories = Category::orderBy('sort_id','ASC')->get();
+        return view('sprint', compact('tasks','categories'));
     }
 
     /**

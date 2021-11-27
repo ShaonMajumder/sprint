@@ -43,10 +43,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 
+    @yield('top-head-css')
+    @yield('top-head-js')
+
+    
+    
     <style>
-        .bug{
-            background-color:#D35352;
-        }
+        
 
         .status-category-box{
           background: rgb(107, 201, 80) none repeat scroll 0% 0%;
@@ -54,29 +57,13 @@
           padding: 2;
         }
       
-        .open {
-          background-color: #C1CEAD;
-        }
-        .bug {
-          background-color:#D35352;
-        }
-
-        .bug + .background{
-          background-color:#D35352;
-          
-         
-        }
+        
         
 
-        .in-progress {
-          background-color:#D6D46A;
-        }
-        .qa{
-          background-color: #5d7db8;
-        }
-        .done{
-          background-color: #52B67C;
-        }
+    
+        
+        
+        
       
         .icon-button{
             color: white;
@@ -103,12 +90,7 @@
 
     </style>
 
-    <script>
-        $(document).ready( function(){
-            
-        });
-    </script>
-
+ 
 </head>
 <body>
     <div id="app">
