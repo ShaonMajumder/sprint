@@ -18,7 +18,7 @@
               <th scope="col">URL</th>
             </tr>
             <tr>
-              <td colspan="8" class="open status" >  <span style="color:white;">Open</span>  </td>
+              <td colspan="8" class="open status" >  <span style="color:white;">open</span>  </td>
             </tr>
         </thead>
         
@@ -112,15 +112,61 @@
 
 
 <script>
-  
-$(document).ready(function () {  
-  function updateIcons(){
-    $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
-    $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');
-    $('.rowRef[category="bug"] .icon').html('<i class="fas fa-times"></i>');
-    $('.rowRef[category="qa"] .icon').html('<i class="fab fa-searchengin text-info"></i>');
-    $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
+ 
+
+  var categories = {
+    value: '',
+    letMeKnow() {
+      console.log(`The variable has changed to ${this.testVar}`);
+      updateIcons();
+    },
+    get testVar() {
+      return this.value;
+    },
+    set testVar(value) {
+      this.value = value;
+      this.letMeKnow();
+    }
   }
+  categories.testVar = null;
+
+  function updateIcons(){
+    if( categories.testVar != null ){
+      categories.testVar.forEach(element => {
+        $('.rowRef[category="'+ element.name +'"] .icon').html(element.icon);  
+      });
+    } 
+  }
+
+  function getCategories(){
+    $.ajax({
+      url: "{{ route('getCategories') }}",
+      type: 'POST',
+      data: {
+        "_token": "{{ csrf_token() }}"
+      },
+      datatype: 'json',
+      success: function (data) { 
+        categories.testVar = data;    
+      },
+      error: function (jqXHR, textStatus, errorThrown) { 
+          
+      }
+    });
+  }
+
+$(document).ready(function () {  
+ 
+  
+
+
+  
+  getCategories();
+   
+    
+  
+
+  
   
   function insertRow(data){
         
@@ -135,6 +181,10 @@ $(document).ready(function () {
     updateIcons();
   }
   
+  function addCategory(){
+
+  }
+
   function addtask(){
     const form = document.querySelector('#newtaskForm');
     const data = Object.fromEntries(new FormData(form).entries());
@@ -164,7 +214,7 @@ $(document).ready(function () {
   
   
         
-  
+
 
   function updatePosition(){
     var order = [];

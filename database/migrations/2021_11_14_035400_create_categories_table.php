@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('sort_id')->unsigned()->default(0);
+            $table->string('icon');
             $table->timestamps();
         });
     }

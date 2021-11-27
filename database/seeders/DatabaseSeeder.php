@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Link;
@@ -30,5 +31,38 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Sprint::factory(5)->create();
+
+        Category::factory()->create([
+            "name" => "open",
+            "sort_id" => 0,
+            "icon" => '<i class="fas fa-folder-open"></i>'
+        ]);
+        Category::factory()->create([
+            "name" => 'done',
+            "sort_id" => 1,
+            "icon" => '<i class="fas fa-check"></i>'
+        ]);
+        Category::factory()->create([
+            "name" => 'bug',
+            "sort_id" => 2,
+            "icon" => '<i class="fas fa-times"></i>'
+        ]);
+        Category::factory()->create([
+            "name" => 'qa',
+            "sort_id" => 3,
+            "icon" => '<i class="fab fa-searchengin"></i>'
+        ]);
+        Category::factory()->create([
+            "name" => 'progress',
+            "sort_id" => 4,
+            "icon" => '<i class="fas fa-wrench"></i>'
+        ]);
+
+        
+    
+    
+    
+        
+
     }
 }
