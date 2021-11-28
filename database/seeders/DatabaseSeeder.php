@@ -33,31 +33,36 @@ class DatabaseSeeder extends Seeder
         Sprint::factory(5)->create();
 
         Category::factory()->create([
-            "name" => "open",
+            "title" => "open",
+            "class" => "open",
             "sort_id" => 0,
             "icon" => '<i class="fas fa-folder-open"></i>',
             "color" => '#C1CEAD'
         ]);
         Category::factory()->create([
-            "name" => 'done',
+            "title" => 'done',
+            "class" => "done",
             "sort_id" => 1,
             "icon" => '<i class="fas fa-check"></i>',
             "color" => '#52B67C'
         ]);
         Category::factory()->create([
-            "name" => 'bug',
+            "title" => 'bug',
+            "class" => "bug",
             "sort_id" => 2,
             "icon" => '<i class="fas fa-times"></i>',
             "color" => '#D35352'
         ]);
         Category::factory()->create([
-            "name" => 'qa',
+            "title" => 'qa',
+            "class" => "qa",
             "sort_id" => 3,
             "icon" => '<i class="fab fa-searchengin"></i>',
             "color" => '#5d7db8'
         ]);
         Category::factory()->create([
-            "name" => 'progress',
+            "title" => 'progress',
+            "class" => "in-progress",
             "sort_id" => 4,
             "icon" => '<i class="fas fa-wrench"></i>',
             "color" => '#D6D46A'

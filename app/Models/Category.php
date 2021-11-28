@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 class Category extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 'class', 'icon', 'color'
+    ];
 
     public function store(Request $request)
     {   

@@ -19,91 +19,33 @@
               <th scope="col">Description</th>
               <th scope="col">URL</th>
             </tr>
-            <tr>
-              <td colspan="8" class="open status" >  <span style="color:white;">open</span>  </td>
-            </tr>
+            
         </thead>
-        
-        <tbody class="tablecontents" dropped-into-category="open">
-          
-          
-          @foreach($tasks as $data)
-            @if($data->category == "open") 
-              <tr class="rowRef" category="open" data-id="{{ $data->id }}" >
-                <td class="icon"></td>
-                <td>{{ $data->title }}</td>
-                <td>{{ $data->description }}</td>
-                <td>{{ $data->url }}</td>
-              </tr>
-            @endif
-            
-          @endforeach
-            
+        <tbody style="display: none; height:0;">
+          <!-- For bypassing first header -->
         </tbody>
 
-        <tbody class="tablecontents" dropped-into-category="done">
-          <tr>
-              <td colspan="8" class="done status" >  <span style="color:white;">Done</span>  </td>
-          </tr>
-            @foreach($tasks as $data)
-              @if ($data->category == "done" )
-                <tr class="rowRef" category="done" data-id="{{ $data->id }}" >
-                    <td class="icon"><i class="fas fa-check"></i></td>
-                    <td>{{ $data->title }}</td>
-                    <td>{{ $data->description }}</td>
-                    <td>{{ $data->url }}</td>
-                </tr>
-              @endif
-            @endforeach
-        </tbody>
-
-        <tbody class="tablecontents" dropped-into-category="bug">
-          <tr>
-            <td colspan="8" class="bug status"> <span style="color:white;">Bug</span> </td>
-          </tr>
-            @foreach($tasks as $data)
-              @if ($data->category == "bug" )
-                <tr class="rowRef" category="bug" data-id="{{ $data->id }}" >
-                  <td class="icon"> <i class="fas fa-times"></i> </td>
-                  <td>{{ $data->title }}</td>
-                  <td>{{ $data->description }}</td>
-                  <td>{{ $data->url }}</td>
-                </tr>
-              @endif
-            @endforeach
-        </tbody>
-
-        <tbody class="tablecontents" dropped-into-category="qa">
-          <tr>
-            <td colspan="8" class="qa background status">QA</td>
-          </tr>
-          @foreach($tasks as $data)
-            @if ($data->category == "qa" )
-              <tr class="rowRef" category="qa" data-id="{{ $data->id }}" >
-                <td class="icon"><i class="fab fa-searchengin text-info"></i></td>
-                  <td>{{ $data->title }}</td>
-                  <td>{{ $data->description }}</td>
-                  <td>{{ $data->url }}</td>
-              </tr>
-            @endif
-          @endforeach
-      </tbody>
-
-        <tbody class="tablecontents" dropped-into-category="progress">
+        @foreach ($categories as $category)
+          <tbody class="tablecontents" dropped-into-category="{{ $category->title }}">
             <tr>
-              <td colspan="8" class="progress background status"> <span style="color:white;"> Progress </span> </td>
+              <td colspan="4" class="{{ $category->class }} status" >  <span style="color:white;">{{ $category->title }}</span>  </td>
             </tr>
+            
             @foreach($tasks as $data)
-              @if ($data->category == "progress" )
-                <tr class="rowRef" category="progress" data-id="{{ $data->id }}" >
-                  <td class="icon"><i class="fas fa-wrench text-warning"></i></td>
+              @if($data->category == $category->title ) 
+                <tr class="rowRef" category="{{ $category->title }}" data-id="{{ $data->id }}" >
+                  <td class="icon"></td>
                   <td>{{ $data->title }}</td>
                   <td>{{ $data->description }}</td>
                   <td>{{ $data->url }}</td>
                 </tr>
               @endif
+              
             @endforeach
-        </tbody>
+              
+          </tbody>
+        @endforeach
+
       </table>
       
     </div>
@@ -116,7 +58,7 @@
 @section('top-head-css')
     <style>
     @foreach($categories as $catogory)
-        .{{ $catogory->name }} {
+        .{{ $catogory->class }} {
         background-color: {{$catogory->color}};
         }
     @endforeach
@@ -171,6 +113,18 @@
 $(document).ready(function () {  
  
   
+  $("#table").dataTable({
+    "order": []
+  });
+
+  $( ".tablecontents" ).sortable({
+    items: ".rowRef",
+    cursor: 'move',
+    opacity: 0.6,
+    update: function() {
+      updatePosition();
+    }
+  });
 
 
   
@@ -287,19 +241,7 @@ $(document).ready(function () {
 
   var droppedInto;
 
-  $("#table").dataTable({
-    "order": []
-  });
-
-  $( ".tablecontents" ).sortable({
-    items: "tr",
-    cursor: 'move',
-    opacity: 0.6,
-    update: function() {
-      updatePosition();
-    }
-  });
-
+ 
 
   function droppedAfter(){
     
@@ -339,8 +281,13 @@ $(document).ready(function () {
 
 
   updateIcons();
+
   $( "#btnNewTaskForm" ).click(function() {
     addtask();
+  });
+
+  $( "#btnNewCategoryForm" ).click(function() {
+    addCategory();
   });
 
 });
