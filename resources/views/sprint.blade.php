@@ -111,152 +111,145 @@
 
 
 
-<script>
-  
-$(document).ready(function () {  
-  function updateIcons(){
-    $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
-    $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');
-    $('.rowRef[category="bug"] .icon').html('<i class="fas fa-times"></i>');
-    $('.rowRef[category="qa"] .icon').html('<i class="fab fa-searchengin text-info"></i>');
-    $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
-  }
-  
-  function insertRow(data){
-        
-    $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
-        '<td class="icon"></td>'+
-        '<td>'+data.title+'</td>'+
-        '<td>'+data.description+'</td>'+
-        '<td>'+data.url+'</td>'+
-    '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
+<script>  
+  $(document).ready(function () {  
+    function updateIcons(){
+      $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
+      $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');
+      $('.rowRef[category="bug"] .icon').html('<i class="fas fa-times"></i>');
+      $('.rowRef[category="qa"] .icon').html('<i class="fab fa-searchengin text-info"></i>');
+      $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
+    }
     
-    updatePosition();
-    updateIcons();
-  }
-  
-  function addtask(){
-    const form = document.querySelector('#newtaskForm');
-    const data = Object.fromEntries(new FormData(form).entries());
-    data["category"] = "open";
-    
-    $.ajax({
-        url: "{{ route('new_task') }}",
-        type: 'POST',
-        data: data,
-        datatype: 'json',
-        success: function (data) { 
-            console.log(data); 
-            insertRow(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) { 
-            
-        }
-    });
-
-    $('#createTaskModal').modal('hide');
-    $("#newtaskForm").trigger("reset");
-
-    
-    data_id = null;
-  }
-
-  
-  
-        
-  
-
-  function updatePosition(){
-    var order = [];
-    $('tr.rowRef').each(function(index,element) {
-      if(element.getAttribute('data-id') != null){
-        order.push({
-          id: element.getAttribute('data-id'),
-          category: element.getAttribute('category'),
-          sort_id: index+1
-        });
-      }
-    });
-
-    $.ajax({
-      type: "POST", 
-      dataType: "json", 
-      url: "{{ url('sprint/sortabledatatable') }}",
-      data: {
-        order:order,
-        _token: '{{csrf_token()}}'
-      },
-      success: function(response) {
-          if (response.status == "success") {
-            console.log(response);
-          } else {
-            console.log(response);
-          }
-      }
-    });
-  }
-  
-  
-
-  var droppedInto;
-
-  $("#table").dataTable({
-    "order": []
-  });
-
-  $( ".tablecontents" ).sortable({
-    items: "tr",
-    cursor: 'move',
-    opacity: 0.6,
-    update: function() {
+    function insertRow(data){
+          
+      $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
+          '<td class="icon"></td>'+
+          '<td>'+data.title+'</td>'+
+          '<td>'+data.description+'</td>'+
+          '<td>'+data.url+'</td>'+
+      '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
+      
       updatePosition();
+      updateIcons();
     }
-  });
-
-
-  function droppedAfter(){
     
-    if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
-        
-      var data_id = event.target.closest('tr').getAttribute('data-id');
-      var fromCategory = event.target.closest('tbody').getAttribute('dropped-into-category');
+    function addtask(){
+      const form = document.querySelector('#newtaskForm');
+      const data = Object.fromEntries(new FormData(form).entries());
+      data["category"] = "open";
+      
+      $.ajax({
+          url: "{{ route('new_task') }}",
+          type: 'POST',
+          data: data,
+          datatype: 'json',
+          success: function (data) { 
+              console.log(data); 
+              insertRow(data);
+          },
+          error: function (jqXHR, textStatus, errorThrown) { 
+              
+          }
+      });
 
-      if(data_id == 'undefined'){
-        console.log('undefined data_id');
-      }
-      console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
-        
-      if( fromCategory != droppedInto && ( data_id !== null && droppedInto !== null ) ){
-        
-        var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
-        $('.rowRef[data-id="'+ data_id +'"]').remove();
-        $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+
-            keepHtml+
-          '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ droppedInto +'"]');
-        updateIcons();
+      $('#createTaskModal').modal('hide');
+      $("#newtaskForm").trigger("reset");
+
+      
+      data_id = null;
+    }
+
+    function updatePosition(){
+      var order = [];
+      $('tr.rowRef').each(function(index,element) {
+        if(element.getAttribute('data-id') != null){
+          order.push({
+            id: element.getAttribute('data-id'),
+            category: element.getAttribute('category'),
+            sort_id: index+1
+          });
+        }
+      });
+
+      $.ajax({
+        type: "POST", 
+        dataType: "json", 
+        url: "{{ url('sprint/sortabledatatable') }}",
+        data: {
+          order:order,
+          _token: '{{csrf_token()}}'
+        },
+        success: function(response) {
+            if (response.status == "success") {
+              console.log(response);
+            } else {
+              console.log(response);
+            }
+        }
+      });
+    }
+    
+    
+
+    
+
+    $("#table").dataTable({
+      "order": []
+    });
+
+    $( ".tablecontents" ).sortable({
+      items: "tr",
+      cursor: 'move',
+      opacity: 0.6,
+      update: function() {
         updatePosition();
-        data_id = null;
-        droppedInto = null;
       }
+    });
+
+
+    function droppedAfter(){
+      
+      if(event.target.tagName == 'TD' && event.target.closest('tr').className.includes('rowRef')){
+          
+        var data_id = event.target.closest('tr').getAttribute('data-id');
+        var fromCategory = event.target.closest('tbody').getAttribute('dropped-into-category');
         
+        // if error occurs for debugging
+        if(data_id == 'undefined'){
+          console.log('undefined data_id');
+        }
+          
+        if( fromCategory != droppedIntoCategory && ( data_id !== null && droppedIntoCategory !== null ) ){
+          
+          var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
+          $('.rowRef[data-id="'+ data_id +'"]').remove();
+          $('<tr class="rowRef" category="'+droppedIntoCategory+'" data-id="'+data_id+'">'+
+              keepHtml+
+            '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ droppedIntoCategory +'"]');
+          updateIcons();
+          updatePosition();
+          data_id = null;
+          droppedInto = null;
+        }
+          
+      }
     }
-  }
 
-  $( ".tablecontents" ).droppable({
-    drop: function( event, ui ) {
-      droppedInto = this.getAttribute('dropped-into-category');
-      console.log("Dropped Into " + droppedInto);
-      droppedAfter();
-    }
+    $( ".tablecontents" ).droppable({
+      drop: function( event, ui ) {
+        droppedIntoCategory = this.getAttribute('dropped-into-category');
+        droppedAfter(droppedIntoCategory);
+      }
+    });
+
+
+    updateIcons();
+    $( "#btnNewTaskForm" ).click(function() {
+      addtask();
+    });
+
   });
-
-
-  updateIcons();
-  $( "#btnNewTaskForm" ).click(function() {
-    addtask();
-  });
-
-});
 </script>
     
 @endsection
