@@ -242,7 +242,7 @@ set .env
 
 
 ## Need to Build
-New Category Sort_ID
+[Done] New Category Sort_ID
 New Category Build Success Message
 New Task Build Success Message
 
