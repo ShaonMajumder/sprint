@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SprintController;
+use App\Models\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,13 +23,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('users');
-Route::get('/tasks', [App\Http\Controllers\SprintController::class, 'index'])->name('sprint');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::get('/tasks', [SprintController::class, 'index'])->name('sprint');
 
 
-Route::post('sprint/sortabledatatable', [App\Http\Controllers\SprintController::class, 'updatePosition'])->name('links_update');
-Route::post('sprint/newtask', [App\Http\Controllers\SprintController::class, 'store'])->name('new_task');
+Route::post('sprint/sortabledatatable', [SprintController::class, 'updatePosition'])->name('links_update');
+Route::post('sprint/getCategories', [SprintController::class, 'getCategories'])->name('getCategories');
+Route::post('sprint/newtask', [SprintController::class, 'store'])->name('new_task');
+Route::post('sprint/newCategory', [Category::class, 'store'])->name('new_category');
 
 
 

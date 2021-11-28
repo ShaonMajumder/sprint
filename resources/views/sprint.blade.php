@@ -7,7 +7,9 @@
     <div class="table-responsive-md">
       
       <button type="button" class="icon-button qa" data-target="#createTaskModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
+      <button type="button" class="icon-button qa" data-target="#createCategoryModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Category</button>
       @include('layouts.create-task-popup')
+      @include('layouts.create-category-popup')
       
       <table id="table" class="table table-striped table-bordered table-hover mb-5">
         <thead>
@@ -18,7 +20,7 @@
               <th scope="col">URL</th>
             </tr>
             <tr>
-              <td colspan="8" class="open status" >  <span style="color:white;">Open</span>  </td>
+              <td colspan="8" class="open status" >  <span style="color:white;">open</span>  </td>
             </tr>
         </thead>
         
@@ -89,7 +91,7 @@
 
         <tbody class="tablecontents" dropped-into-category="progress">
             <tr>
-              <td colspan="8" class="in-progress background status"> <span style="color:white;"> Progress </span> </td>
+              <td colspan="8" class="progress background status"> <span style="color:white;"> Progress </span> </td>
             </tr>
             @foreach($tasks as $data)
               @if ($data->category == "progress" )
@@ -108,31 +110,124 @@
   </div>
       
 </div>
-
-
-
-<script>  
-  $(document).ready(function () {  
-    function updateIcons(){
-      $('.rowRef[category="open"] .icon').html('<i class="fas fa-folder-open"></i>');
-      $('.rowRef[category="done"] .icon').html('<i class="fas fa-check"></i>');
-      $('.rowRef[category="bug"] .icon').html('<i class="fas fa-times"></i>');
-      $('.rowRef[category="qa"] .icon').html('<i class="fab fa-searchengin text-info"></i>');
-      $('.rowRef[category="progress"] .icon').html('<i class="fas fa-wrench text-warning"></i>');
-    }
     
-    function insertRow(data){
-          
-      $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
-          '<td class="icon"></td>'+
-          '<td>'+data.title+'</td>'+
-          '<td>'+data.description+'</td>'+
-          '<td>'+data.url+'</td>'+
-      '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
-      
-      updatePosition();
+@endsection
+
+@section('top-head-css')
+    <style>
+    @foreach($categories as $catogory)
+        .{{ $catogory->name }} {
+        background-color: {{$catogory->color}};
+        }
+    @endforeach
+
+    </style>
+@endsection
+
+
+@section('top-head-js')
+<script>
+
+  var categories = {
+    value: '',
+    letMeKnow() {
+      console.log(`The variable has changed to ${this.testVar}`);
       updateIcons();
+    },
+    get testVar() {
+      return this.value;
+    },
+    set testVar(value) {
+      this.value = value;
+      this.letMeKnow();
     }
+  }
+  categories.testVar = null;
+
+  function updateIcons(){
+    if( categories.testVar != null ){
+      categories.testVar.forEach(element => {
+        $('.rowRef[category="'+ element.name +'"] .icon').html(element.icon);  
+      });
+    } 
+  }
+
+  function getCategories(){
+    $.ajax({
+      url: "{{ route('getCategories') }}",
+      type: 'POST',
+      data: {
+        "_token": "{{ csrf_token() }}"
+      },
+      datatype: 'json',
+      success: function (data) { 
+        categories.testVar = data;    
+      },
+      error: function (jqXHR, textStatus, errorThrown) { 
+          
+      }
+    });
+  }
+
+$(document).ready(function () {  
+ 
+  
+
+
+  
+  getCategories();
+   
+    
+  
+
+  
+  
+  function insertRow(data){
+        
+    $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
+        '<td class="icon"></td>'+
+        '<td>'+data.title+'</td>'+
+        '<td>'+data.description+'</td>'+
+        '<td>'+data.url+'</td>'+
+    '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
+    
+    updatePosition();
+    updateIcons();
+  }
+  
+
+
+
+  function addCategory(){
+    const form = document.querySelector('#newCategoryForm');
+    const data = Object.fromEntries(new FormData(form).entries());
+    
+    
+    $.ajax({
+        url: "{{ route('new_category') }}",
+        type: 'POST',
+        data: data,
+        datatype: 'json',
+        success: function (data) { 
+            insertRow(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) { 
+            
+        }
+    });
+
+    $('#createTaskModal').modal('hide');
+    $("#newtaskForm").trigger("reset");
+
+    
+    data_id = null;
+  }
+
+  function addtask(){
+    const form = document.querySelector('#newtaskForm');
+    const data = Object.fromEntries(new FormData(form).entries());
+    data["category"] = "open";
+>>>>>>> 15934c2c1761062ec866453fc27e301f6964fc6f
     
     function addtask(){
       const form = document.querySelector('#newtaskForm');
@@ -192,7 +287,14 @@
     
     
 
+<<<<<<< HEAD
     
+=======
+  
+  
+        
+
+>>>>>>> 15934c2c1761062ec866453fc27e301f6964fc6f
 
     $("#table").dataTable({
       "order": []
@@ -251,5 +353,4 @@
 
   });
 </script>
-    
 @endsection
