@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'class', 'icon', 'color'
+        'title', 'class', 'icon', 'color', 'sort_id'
     ];
 
    

@@ -14,7 +14,8 @@ class CategoryController extends Controller
             'title' => $request->title,
             'class' => $request->class,
             'icon' => $request->icon,
-            'color' => $request->color
+            'color' => $request->color,
+            'sort_id' => Category::max('sort_id') + 1
         ]);
         
 
