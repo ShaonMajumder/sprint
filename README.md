@@ -245,7 +245,6 @@ set .env
 New Category Sort_ID
 New Category Build Success Message
 New Task Build Success Message
-Merge to Money
 
 ## About Laravel
 
