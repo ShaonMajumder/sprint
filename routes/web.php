@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -31,7 +32,7 @@ Route::get('/tasks', [SprintController::class, 'index'])->name('sprint');
 Route::post('sprint/sortabledatatable', [SprintController::class, 'updatePosition'])->name('links_update');
 Route::post('sprint/getCategories', [SprintController::class, 'getCategories'])->name('getCategories');
 Route::post('sprint/newtask', [SprintController::class, 'store'])->name('new_task');
-Route::post('sprint/newCategory', [Category::class, 'store'])->name('new_category');
+Route::post('sprint/newCategory', [CategoryController::class, 'store'])->name('new_category');
 
 
 
