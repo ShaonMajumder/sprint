@@ -86,9 +86,10 @@
   categories.testVar = null;
 
   function updateIcons(){
+    console.log(categories);
     if( categories.testVar != null ){
       categories.testVar.forEach(element => {
-        $('.rowRef[category="'+ element.name +'"] .icon').html(element.icon);  
+        $('.rowRef[category="'+ element.title +'"] .icon').html(element.icon);  
       });
     } 
   }
@@ -111,8 +112,7 @@
   }
 
 $(document).ready(function () {  
- 
-  
+   
   $("#table").dataTable({
     "order": []
   });
@@ -125,16 +125,11 @@ $(document).ready(function () {
       updatePosition();
     }
   });
-
+  
 
   
   getCategories();
    
-    
-  
-
-  
-  
   function insertRow(data){
         
     $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
@@ -148,8 +143,6 @@ $(document).ready(function () {
     updateIcons();
   }
   
-
-
 
   function addCategory(){
     const form = document.querySelector('#newCategoryForm');
@@ -182,17 +175,17 @@ $(document).ready(function () {
     data["category"] = "open";
     
     $.ajax({
-        url: "{{ route('new_task') }}",
-        type: 'POST',
-        data: data,
-        datatype: 'json',
-        success: function (data) { 
-            console.log(data); 
-            insertRow(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown) { 
-            
-        }
+      url: "{{ route('new_task') }}",
+      type: 'POST',
+      data: data,
+      datatype: 'json',
+      success: function (data) { 
+        
+        insertRow(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) { 
+        
+      }
     });
 
     $('#createTaskModal').modal('hide');
