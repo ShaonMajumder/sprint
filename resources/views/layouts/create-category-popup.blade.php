@@ -14,17 +14,22 @@
             @csrf
   
             <div class="form-group">
-              <label for="recipient-name1" class="col-form-label">Title:</label>
-              <input type="text" class="form-control" id="recipient-name1"  name="title">
+              <label for="title" class="col-form-label">Title:</label>
+              <input type="text" class="form-control" id="title" name="title">
             </div>
             <div class="form-group">
-              <label for="message-text2" class="col-form-label">Description:</label>
-              <textarea class="form-control" id="message-text2" name="description"></textarea>
+              <label for="class" class="col-form-label">Class</label>
+              <input type="text" class="form-control" id="class" name="class">
             </div>
             <div class="form-group">
-              <label for="recipient-name2" class="col-form-label">URL:</label>
-              <input type="text" class="form-control" id="recipient-name2"  name="url">
+              <label for="icon" class="col-form-label">icon</label>
+              <input type="text" class="form-control" id="icon" name="icon">
             </div>
+            <div class="form-group">
+              <label for="color" class="col-form-label">Color</label>
+              <input type="color" class="form-control" id="color" name="color">
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
