@@ -23,7 +23,6 @@ class SprintController extends Controller
      */
     public function store(Request $request)
     {   
-        
         $newTask = Sprint::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -44,7 +43,6 @@ class SprintController extends Controller
             $id = $task->id;
            
             foreach ($request->order as $order) {
-                
                 if ($order['id'] == $id) {
                     $task->update([
                         'sort_id' => $order['sort_id'],
@@ -55,7 +53,6 @@ class SprintController extends Controller
         }
 
         return response('Updated Postions Successfully.', 200);
-   
     }
 
     public function getCategories(Request $request){
