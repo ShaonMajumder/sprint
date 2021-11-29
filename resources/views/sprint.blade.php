@@ -78,8 +78,8 @@ This query will take effect for any screen smaller than 760px
 and also iPads specifically.
 */
 @media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+only screen and (max-width: 768px),
+(min-device-width: 320px) and (max-device-width: 768px)  {
 
 	/* Force table to not be like tables anymore */
 	table, thead, tbody, th, td, tr { 
@@ -128,6 +128,18 @@ only screen and (max-width: 760px),
 
 @section('top-head-js')
 <script>
+  // making table normal / responsive
+  function resize() {
+      if ( $(window).width() < 768 ){
+        $('#table').removeClass("table");
+        $('#table').removeClass("table-responsive");
+      }else{
+        $('#table').addClass("table");
+        $('#table').addClass("table-responsive");
+      }
+  }
+
+  $(window).on("resize", resize);
 
   var categories = {
     value: '',
@@ -171,7 +183,8 @@ only screen and (max-width: 760px),
   }
 
 $(document).ready(function () {  
-   
+  resize();
+
   $("#table").dataTable({
     "order": []
   });
