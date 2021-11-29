@@ -2,7 +2,10 @@
 @section('content')
 
 
+
+
 <div class="container">
+  <div class="overlay"></div>
   <div class="row justify-content-center">
     <div class="table-responsive-md">
       
@@ -67,7 +70,11 @@
 
     </style>
     <style>
-/*breakable table view*/
+
+      
+
+
+    /*breakable table view*/
       tr:nth-of-type(odd) { 
         background: #eee; 
       }
@@ -129,6 +136,8 @@ only screen and (max-width: 768px),
 
 @section('top-head-js')
 <script>
+  
+
   // making table normal / responsive
   function resize() {
       if ( $(window).width() < 768 ){
@@ -184,6 +193,9 @@ only screen and (max-width: 768px),
   }
 
 $(document).ready(function () {  
+
+
+
   resize();
 
   $("#table").dataTable({
