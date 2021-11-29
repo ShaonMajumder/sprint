@@ -29,7 +29,7 @@ class SprintController extends Controller
             'description' => $request->description,
             'url' => $request->url,
         ]);
-        $newTask = Sprint::where('url', $newTask->url)->get();
+        $newTask = Sprint::where('url', $newTask->url)->first();
 
         $dataArray = $newTask->toArray();
         return response()->json( $dataArray , 200);

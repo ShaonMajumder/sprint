@@ -134,7 +134,6 @@ $(document).ready(function () {
 
   }
   function insertRow(data){
-      console.log(data);
     $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
         '<td class="icon"></td>'+
         '<td>'+data.title+'</td>'+
