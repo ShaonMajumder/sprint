@@ -58,6 +58,7 @@
 
 @section('top-head-css')
     <style>
+      /*row color*/
     @foreach($categories as $catogory)
         .{{ $catogory->class }} {
         background-color: {{$catogory->color}};
@@ -66,7 +67,7 @@
 
     </style>
     <style>
-
+/*breakable table view*/
       tr:nth-of-type(odd) { 
         background: #eee; 
       }
