@@ -86,7 +86,6 @@
   categories.testVar = null;
 
   function updateIcons(){
-    console.log(categories);
     if( categories.testVar != null ){
       categories.testVar.forEach(element => {
         $('.rowRef[category="'+ element.title +'"] .icon').html(element.icon);  
@@ -247,7 +246,7 @@ $(document).ready(function () {
       if(data_id == 'undefined'){
         console.log('undefined data_id');
       }
-      console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
+      //console.log( 'From Category-' + fromCategory + ', Droped Into-' + droppedInto + ', data-id-' +data_id);
         
       if( fromCategory != droppedInto && ( data_id !== null && droppedInto !== null ) ){
         
