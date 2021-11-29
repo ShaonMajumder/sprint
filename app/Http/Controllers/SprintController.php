@@ -23,14 +23,13 @@ class SprintController extends Controller
      */
     public function store(Request $request)
     {   
-        dd($request);
+        
         $newTask = Sprint::create([
             'title' => $request->title,
             'description' => $request->description,
             'url' => $request->url,
-            'category' => 'open'
         ]);
-        
+        $newTask = Sprint::where('url', $newTask->url)->first();
 
         $dataArray = $newTask->toArray();
         return response()->json( $dataArray , 200);
@@ -61,11 +60,7 @@ class SprintController extends Controller
 
     public function getCategories(Request $request){
         $categories = Category::orderBy('sort_id','ASC')->get();
-
-            
-        
         $dataArray = $categories->toArray();
         return response()->json( $dataArray , 200);
-    
     }
 }
