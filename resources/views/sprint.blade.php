@@ -129,9 +129,12 @@ $(document).ready(function () {
 
   
   getCategories();
-   
+  
+  function insertCategory(data){
+
+  }
   function insertRow(data){
-        
+      console.log(data);
     $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
         '<td class="icon"></td>'+
         '<td>'+data.title+'</td>'+
@@ -155,7 +158,7 @@ $(document).ready(function () {
         data: data,
         datatype: 'json',
         success: function (data) { 
-            insertRow(data);
+            insertCategory(data);
         },
         error: function (jqXHR, textStatus, errorThrown) { 
             
@@ -172,7 +175,7 @@ $(document).ready(function () {
   function addtask(){
     const form = document.querySelector('#newtaskForm');
     const data = Object.fromEntries(new FormData(form).entries());
-    data["category"] = "open";
+    //data["category"] = "open";
     
     $.ajax({
       url: "{{ route('new_task') }}",
@@ -180,7 +183,6 @@ $(document).ready(function () {
       data: data,
       datatype: 'json',
       success: function (data) { 
-        
         insertRow(data);
       },
       error: function (jqXHR, textStatus, errorThrown) { 

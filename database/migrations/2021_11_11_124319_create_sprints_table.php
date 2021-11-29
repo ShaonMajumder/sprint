@@ -17,7 +17,7 @@ class CreateSprintsTable extends Migration
             $table->id();
             $table->integer('sort_id')->unsigned()->default(0);
             $table->string('title');
-            $table->string('category');
+            $table->string('category')->default('open');
             $table->string('description');
             $table->string('url')->unique();
             $table->timestamps();
