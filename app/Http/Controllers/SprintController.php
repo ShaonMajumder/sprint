@@ -23,7 +23,6 @@ class SprintController extends Controller
      */
     public function store(Request $request)
     {   
-        
         $newTask = Sprint::create([
             'title' => $request->title,
             'category' => ($request->category) ? $request->category : env('DEFAULT_CATEGORY_NAME'),
@@ -31,7 +30,6 @@ class SprintController extends Controller
             'url' => $request->url,
         ]);
         $newTask = Sprint::where('url', $newTask->url)->first();
-
         $dataArray = $newTask->toArray();
         return response()->json( $dataArray , 200);
     }
