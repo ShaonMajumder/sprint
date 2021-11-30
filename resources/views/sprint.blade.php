@@ -9,7 +9,7 @@
 @section('content')
 
 
-
+  
 
   <div class="container">
 
@@ -52,9 +52,11 @@
                 @if($data->category == $category->title ) 
                   <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
-                    <td>{{ $data->{$task_table_column_names[1]} }}</td>
-                    <td>{{ $data->{$task_table_column_names[2]} }}</td>
-                    <td>{{ $data->{$task_table_column_names[3]} }}</td>
+                    @foreach($data->toArray() as $key => $datatd)
+                      @if( $key != $tasks->first()->getKeyName() )
+                        <td>{{ $datatd }}</td>
+                      @endif
+                    @endforeach
                   </tr>
                 @endif
                 
