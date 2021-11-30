@@ -23,8 +23,10 @@ class SprintController extends Controller
      */
     public function store(Request $request)
     {   
+        
         $newTask = Sprint::create([
             'title' => $request->title,
+            'category' => ($request->category) ? $request->category : env('DEFAULT_CATEGORY_NAME'),
             'description' => $request->description,
             'url' => $request->url,
         ]);
