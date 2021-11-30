@@ -1,5 +1,16 @@
+@php $task_table_column_names = []; @endphp
+@foreach ($tasks->first()->toArray() as $key => $column )
+  @if( $key != $tasks->first()->getKeyName() )
+    @php array_push($task_table_column_names, $key);  @endphp
+  @endif
+@endforeach
+
 @extends('layouts.app')
 @section('content')
+
+
+
+
   <div class="container">
 
     <div class="alert alert-success" id="success-alert">
@@ -20,10 +31,9 @@
           
           <thead>
               <tr>
-                <th scope="col">Icon</th>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">URL</th>
+                @foreach ($task_table_column_names as $item)
+                  <th scope="col">{{ $item }}</th>    
+                @endforeach
               </tr>
               
           </thead>
@@ -37,12 +47,14 @@
                 <td colspan="4" class="{{ $category->class }} status" >  <span style="color:white;">{{ $category->title }}</span>  </td>
               </tr>
               @foreach($tasks as $data)
+               
+                
                 @if($data->category == $category->title ) 
                   <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
-                    <td>{{ $data->title }}</td>
-                    <td>{{ $data->description }}</td>
-                    <td>{{ $data->url }}</td>
+                    <td>{{ $data->{$task_table_column_names[1]} }}</td>
+                    <td>{{ $data->{$task_table_column_names[2]} }}</td>
+                    <td>{{ $data->{$task_table_column_names[3]} }}</td>
                   </tr>
                 @endif
                 
@@ -122,6 +134,10 @@
       /*
       Label the data
       */
+      @foreach ($task_table_column_names as $column )
+        td:nth-of-type({{ $loop->iteration }}):before { content: '{{ $key }}' ; }
+      @endforeach
+
       .rowRef td:nth-of-type(1):before { content: "Icon"; }
       .rowRef td:nth-of-type(2):before { content: "Title"; }
       .rowRef td:nth-of-type(3):before { content: "Description"; }
