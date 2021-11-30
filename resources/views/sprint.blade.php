@@ -36,11 +36,9 @@
               <tr>
                 <td colspan="4" class="{{ $category->class }} status" >  <span style="color:white;">{{ $category->title }}</span>  </td>
               </tr>
-              
               @foreach($tasks as $data)
-              @php $id = $loop->iteration @endphp
                 @if($data->category == $category->title ) 
-                  <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $id }}" >
+                  <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
                     <td>{{ $data->title }}</td>
                     <td>{{ $data->description }}</td>
