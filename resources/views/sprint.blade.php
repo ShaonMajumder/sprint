@@ -20,14 +20,11 @@
 
     <div class="row justify-content-center">
       <div class="table-responsive-md">
-        
         <button type="button" class="icon-button qa" data-target="#createTaskModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
         <button type="button" class="icon-button qa" data-target="#createCategoryModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Category</button>
         @include('layouts.create-task-popup')
         @include('layouts.create-category-popup')
-        
         <table id="table" class="table-bordered table-hover mb-5">
-          
           <thead>
               <tr>
                 <th scope="col">Icon</th>
@@ -37,20 +34,16 @@
                   @endif
                 @endforeach
               </tr>
-              
           </thead>
           <tbody style="display: none; height:0;">
             <!-- For bypassing first header -->
           </tbody>
-
           @foreach ($categories as $category)
             <tbody class="tablecontents" dropped-into-category="{{ $category->title }}">
               <tr>
                 <td colspan="{{ count($tasks->first()->toArray()) - 1 }}" class="{{ $category->class }} status" >  <span style="color:white;">{{ $category->title }}</span>  </td>
               </tr>
               @foreach($tasks as $data)
-               
-                
                 @if($data->category == $category->title ) 
                   <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
@@ -62,17 +55,12 @@
                     @endforeach
                   </tr>
                 @endif
-                
               @endforeach
-                
             </tbody>
           @endforeach
-
         </table>
-        
       </div>
     </div>
-        
   </div>
 @endsection
 
