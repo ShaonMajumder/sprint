@@ -5,7 +5,13 @@
 
 
 <div class="container">
-  <div class="overlay"></div>
+
+  <div class="alert alert-success" id="success-alert">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <i class="far fa-check-circle" aria-label="Success:"></i>
+    <strong>Success! </strong> Product have added to your wishlist.
+  </div>
+
   <div class="row justify-content-center">
     <div class="table-responsive-md">
       
@@ -197,6 +203,7 @@ $(document).ready(function () {
 
 
   resize();
+  $("#success-alert").hide();
 
   $("#table").dataTable({
     "order": []
@@ -218,6 +225,11 @@ $(document).ready(function () {
   function insertCategory(data){
 
   }
+
+  function alertMessage(){
+    
+  }
+
   function insertRow(data){
     $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
         '<td class="icon"></td>'+
@@ -268,6 +280,8 @@ $(document).ready(function () {
       datatype: 'json',
       success: function (data) { 
         insertRow(data);
+        
+        $("#success-alert").hide();
       },
       error: function (jqXHR, textStatus, errorThrown) { 
         

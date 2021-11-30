@@ -246,6 +246,26 @@ set .env
 New Category Build Success Message
 New Task Build Success Message
 
+
+## File Permission Sudo Error
+### octal Permission -
+>_ stat -c "%a %n" *
+
+cd [..LARAVEL PROJECT ROOT]
+sudo find . -type f -exec chmod 644 {} \;
+sudo find . -type d -exec chmod 755 {} \;
+sudo chmod -R 777 ./storage
+sudo chmod -R 777 ./bootstrap/cache/
+Only if you use npm (VUE, compiling SASS, etc..) add this:
+
+sudo chmod -R 777 ./node_modules/
+What it does:
+
+Change all file permissions to 644
+Change all folder permissions to 755
+For storage and bootstrap cache (special folders used by laravel for creating and executing files, not available from outside) set permission to 777, for anything inside
+For nodeJS executable, same as above
+
 ## About Laravel
 
 

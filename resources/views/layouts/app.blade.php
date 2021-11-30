@@ -58,12 +58,6 @@
         }
       
         
-        
-
-    
-        
-        
-        
       
         .icon-button{
             color: white;
@@ -84,10 +78,10 @@
             position: absolute;
             background-color: black ;
             opacity: 0;
-            display: block;
+            display: none;
         }
 
-        
+
         /*start-loading*/
         .loader-wrapper {
             width: 100%;
@@ -150,12 +144,11 @@
     </script>
 </head>
 <body>
+    <div class="overlay"></div>
+    <!-- img src="https://picsum.photos/300/300/?random" /-->
 
-    
-      <!-- img src="https://picsum.photos/300/300/?random" /-->
-    
     <div id="loading" class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
+        <span class="loader"><span class="loader-inner"></span></span>
     </div>
 
     <div id="app">
