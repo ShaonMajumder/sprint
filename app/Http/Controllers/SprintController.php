@@ -10,7 +10,7 @@ class SprintController extends Controller
 {
     public function index()
     {
-        $viewable = ['title','description','url','money_aloted'];
+        $viewable = ['title','description','url','task_budget'];
         
         $tasks =  Sprint::orderBy('sort_id','ASC')
                           ->get();

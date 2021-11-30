@@ -20,8 +20,8 @@ class CreateSprintsTable extends Migration
             $table->string('category')->default( env('DEFAULT_CATEGORY_NAME') );
             $table->string('description');
             $table->string('time_aloted')->default(0);
-            $table->double('money_aloted')->default(0);
             $table->string('url')->unique();
+            $table->double('task_budget')->default(0);
             $table->timestamps();
         });
     }
