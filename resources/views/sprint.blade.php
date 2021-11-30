@@ -10,7 +10,6 @@
 
 
 
-
   <div class="container">
 
     <div class="alert alert-success" id="success-alert">
@@ -31,8 +30,11 @@
           
           <thead>
               <tr>
+                <th scope="col">Icon</th>
                 @foreach ($task_table_column_names as $item)
-                  <th scope="col">{{ $item }}</th>    
+                  @if (in_array($item, $viewable))
+                    <th scope="col">{{ $item }}</th>
+                  @endif
                 @endforeach
               </tr>
               
@@ -53,7 +55,8 @@
                   <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
                     @foreach($data->toArray() as $key => $datatd)
-                      @if( $key != $tasks->first()->getKeyName() )
+                      {{-- @if( $key != $tasks->first()->getKeyName() ) --}}
+                      @if(in_array($key, $viewable))
                         <td>{{ $datatd }}</td>
                       @endif
                     @endforeach

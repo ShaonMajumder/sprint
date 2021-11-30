@@ -10,13 +10,12 @@ class SprintController extends Controller
 {
     public function index()
     {
-        $viewable = ['id','title','category','description','url','money_aloted'];
+        $viewable = ['title','description','url','money_aloted'];
         
-        $tasks =  Sprint::select($viewable)
-                          ->orderBy('sort_id','ASC')
+        $tasks =  Sprint::orderBy('sort_id','ASC')
                           ->get();
         $categories = Category::orderBy('sort_id','ASC')->get();
-        return view('sprint', compact('tasks','categories'));
+        return view('sprint', compact('tasks','categories', 'viewable'));
     }
 
     /**
