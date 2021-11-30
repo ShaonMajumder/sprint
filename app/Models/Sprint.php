@@ -9,6 +9,6 @@ class Sprint extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'sort_id', 'title', 'category', 'description', 'url'
+        'sort_id', 'title', 'icon', 'category', 'description', 'url'
     ];
 }

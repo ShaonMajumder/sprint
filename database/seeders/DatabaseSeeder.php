@@ -17,9 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $default_password = bcrypt("123456");
-
-        // \App\Models\User::factory(10)->create();
+        $default_password = bcrypt(env('ACCOUNT_DEFAULT_PASSWORD'));
+        
         $user1 = User::factory()->create([
             "name" => "Shaon Majumder",
             "email"=> "smazoomder@gmail.com",
