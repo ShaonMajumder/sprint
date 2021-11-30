@@ -9,7 +9,7 @@
 @section('content')
 
 
-  
+
 
   <div class="container">
 
@@ -44,7 +44,7 @@
           @foreach ($categories as $category)
             <tbody class="tablecontents" dropped-into-category="{{ $category->title }}">
               <tr>
-                <td colspan="4" class="{{ $category->class }} status" >  <span style="color:white;">{{ $category->title }}</span>  </td>
+                <td colspan="{{ count($tasks->first()->toArray()) - 1 }}" class="{{ $category->class }} status" >  <span style="color:white;">{{ $category->title }}</span>  </td>
               </tr>
               @foreach($tasks as $data)
                
