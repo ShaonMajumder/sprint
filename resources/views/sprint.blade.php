@@ -139,14 +139,13 @@
       /*
       Label the data
       */
-      @foreach ($task_table_column_names as $column )
-        td:nth-of-type({{ $loop->iteration }}):before { content: '{{ $key }}' ; }
+      .rowRef td:nth-of-type(1):before { content: 'Icon' ; }
+      @php $iterate = 2; @endphp
+      @foreach ($task_table_column_names as $key )
+        @if( in_array($key, $viewable ) )
+            .rowRef td:nth-of-type({{ $iterate++ }}):before { content: '{{ $key }}' ; }
+        @endif
       @endforeach
-
-      .rowRef td:nth-of-type(1):before { content: "Icon"; }
-      .rowRef td:nth-of-type(2):before { content: "Title"; }
-      .rowRef td:nth-of-type(3):before { content: "Description"; }
-      .rowRef td:nth-of-type(4):before { content: "URL"; }
       
     }
   </style>
