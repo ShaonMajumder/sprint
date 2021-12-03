@@ -246,7 +246,10 @@ set .env
 New Category Build Success Message
 New Task Build Success Message
 USER WISE
-Project WISE
+[In Progress] Relationship
+[Done] View of Auth USER ID -> Project WISE -> Category WISE -> Tasks 
+Create Category
+Create Project
 
 ## File Permission Sudo Error
 ### octal Permission -
