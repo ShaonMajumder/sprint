@@ -12,7 +12,9 @@
 @section('content')
 
   <div class="container">
-
+    @foreach($tasks as $data)
+     {{ $data->category->title }}
+    @endforeach
     <div class="alert alert-success" id="success-alert">
       <button type="button" class="close" data-dismiss="alert">x</button>
       <i class="far fa-check-circle" aria-label="Success:"></i>
@@ -48,7 +50,7 @@
                 <td colspan="{{ count($tasks->first()->toArray()) - 1 }}" class="{{ $category->class }} status" >  <span>{{ $category->title }}</span>  </td>
               </tr>
               @foreach($tasks as $data)
-                @if($data->category == $category->title ) 
+                @if($data->category->title == $category->title ) 
                   <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
                     @foreach($data->toArray() as $key => $datatd)
@@ -304,6 +306,7 @@
       function updatePosition(){
         var order = [];
         $('tr.rowRef').each(function(index,element) {
+          alert( element.getAttribute('category') );
           if(element.getAttribute('data-id') != null){
             order.push({
               id: element.getAttribute('data-id'),

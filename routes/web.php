@@ -35,3 +35,5 @@ Route::post('sprint/getCategories', [SprintController::class, 'getCategories'])-
 
 Route::post('sprint/newtask', [SprintController::class, 'store'])->name('new_task');
 Route::post('sprint/newCategory', [CategoryController::class, 'store'])->name('new_category');
+
+Route::get('test', [SprintController::class, 'test'])->name('lin');
