@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             "title" => 'Sprint'
         ]);
 
-        Category::factory()->create([
+        $categoryDefault = Category::factory()->create([
             "project_id" => $project1->id,
             "title" => "open",
             "class" => "open",
@@ -80,8 +80,10 @@ class DatabaseSeeder extends Seeder
             "user_id" => $user1->id,
         ]);
 
-        Sprint::factory(5)->create();
+    
+        Sprint::factory(5)->create([
+            "category_id" => $categoryDefault->id,
+        ]);
         
-
     }
 }
