@@ -189,7 +189,7 @@
     function updateIcons(){
       if( categories.testVar != null ){
         categories.testVar.forEach(element => {
-          $('.rowRef[category-id="'+ element.category_id +'"] .icon').html(element.icon);  
+          $('.rowRef[category-id="'+ element.id +'"] .icon').html(element.icon);  
         });
       } 
     }
@@ -241,6 +241,7 @@
       }
 
       function insertRow(data){
+        console.log(data);
         $('<tr class="rowRef ui-sortable-handle" category-id="'+data.category_id+'" data-id="'+data.id+'">'+
             '<td class="icon"></td>'+
             '<td>'+data.title+'</td>'+

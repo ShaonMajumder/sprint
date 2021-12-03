@@ -1,5 +1,3 @@
-
-
 <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -12,6 +10,15 @@
       <div class="modal-body">
         <form action="{{ route('new_task') }}" method="post" id="newtaskForm">
           @csrf
+
+          <div class="form-group">
+            <select name="category_id" class="form-select" aria-label="Default select example">
+              <option selected disabled>Open this select menu</option>
+              @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->title }}</option>
+              @endforeach
+            </select>
+          </div>
 
           <div class="form-group">
             <label for="recipient-name1" class="col-form-label">Title:</label>
