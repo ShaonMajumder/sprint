@@ -44,7 +44,7 @@ class SprintController extends Controller
             $task->timestamps = false; // To disable update_at field updation
             $task->update([
                 'sort_id' => $order['sort_id'],
-                'category_id' => Category::where('title',  $order['category'] )->first()->id 
+                'category_id' => $order['category_id']
             ]);    
         }
         return response('Updated Postions Successfully.', 200);
