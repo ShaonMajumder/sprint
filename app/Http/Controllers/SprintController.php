@@ -39,22 +39,14 @@ class SprintController extends Controller
 
     public function updatePosition(Request $request)
     {
-        $tasks = Sprint::all();
-
-        foreach ($tasks as $task) {
+        foreach ($request->order as $order) {
+            $task = Sprint::find($order['id']);
             $task->timestamps = false; // To disable update_at field updation
-            $id = $task->id;
-            
-            foreach ($request->order as $order) {
-                if ($order['id'] == $id) {
-                    $task->update([
-                        'sort_id' => $order['sort_id'],
-                        'category_id' => Category::where('title',$order['category'])->first()->id
-                    ]);
-                }
-            }
+            $task->update([
+                'sort_id' => $order['sort_id'],
+                'category_id' => Category::where('title',  $order['category'] )->first()->id 
+            ]);    
         }
-
         return response('Updated Postions Successfully.', 200);
     }
 

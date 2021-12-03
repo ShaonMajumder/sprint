@@ -212,6 +212,7 @@
     }
 
     $(document).ready(function () {  
+      updatePosition();
 
       resize();
       $("#success-alert").hide();
@@ -306,7 +307,6 @@
       function updatePosition(){
         var order = [];
         $('tr.rowRef').each(function(index,element) {
-          alert( element.getAttribute('category') );
           if(element.getAttribute('data-id') != null){
             order.push({
               id: element.getAttribute('data-id'),
