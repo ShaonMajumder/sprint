@@ -27,6 +27,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/tasks', [SprintController::class, 'index'])->name('sprint');
+Route::get('/projects', [SprintController::class, 'projects'])->name('project');
 
 
 Route::post('sprint/sortabledatatable', [SprintController::class, 'updatePosition'])->name('links_update');

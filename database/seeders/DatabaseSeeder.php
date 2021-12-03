@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Link;
 use App\Models\Sprint;
+use App\Models\Project;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,9 +25,14 @@ class DatabaseSeeder extends Seeder
             "email"=> "smazoomder@gmail.com",
             "password" => $default_password
         ]);
-
+        
         User::factory(100)->create([
             "password" => $default_password
+        ]);
+
+        Project::factory()->create([
+            "user_id" => $user1->id,
+            "title" => "Life"
         ]);
 
         Sprint::factory(5)->create();
