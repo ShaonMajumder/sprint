@@ -5,15 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Sprint;
 use Illuminate\Http\Request;
+use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 
 class SprintController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index(Request $request)
     {
         $viewable = ['title','description','url','task_budget'];
         
-        $tasks =  Sprint::orderBy('sort_id','ASC')
-                          ->get();
+        $tasks =  Project::where('title', $request->get('title'))
+                           ->where('user_id', Auth::id())
+                           ->first()
+                           ->sprints()
+                           ->orderBy('sort_id','ASC')
+                           ->get();
+        
         $categories = Category::orderBy('sort_id','ASC')->get();
         return view('sprint', compact('tasks','categories', 'viewable'));
     }
