@@ -51,7 +51,7 @@
               </tr>
               @foreach($tasks as $data)
                 @if($data->category->title == $category->title ) 
-                  <tr class="rowRef" category="{{ $category->id }}" data-id="{{  $data->id }}" >
+                  <tr class="rowRef" category-id="{{ $category->id }}" data-id="{{  $data->id }}" >
                     <td class="icon"></td>
                     @foreach($data->toArray() as $key => $datatd)
                       {{-- @if( $key != $tasks->first()->getKeyName() ) --}}
@@ -189,7 +189,7 @@
     function updateIcons(){
       if( categories.testVar != null ){
         categories.testVar.forEach(element => {
-          $('.rowRef[category="'+ element.id +'"] .icon').html(element.icon);  
+          $('.rowRef[category-id="'+ element.id +'"] .icon').html(element.icon);  
         });
       } 
     }
@@ -241,12 +241,13 @@
       }
 
       function insertRow(data){
-        $('<tr class="rowRef ui-sortable-handle" category="'+data.category+'" data-id="'+data.id+'">'+
+        console.log(data);
+        $('<tr class="rowRef ui-sortable-handle" category-id="'+data.category_id+'" data-id="'+data.id+'">'+
             '<td class="icon"></td>'+
             '<td>'+data.title+'</td>'+
             '<td>'+data.description+'</td>'+
             '<td>'+data.url+'</td>'+
-        '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category +'"]');
+        '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category_id +'"]');
         
         updatePosition();
         updateIcons();
@@ -310,7 +311,7 @@
           if(element.getAttribute('data-id') != null){
             order.push({
               id: element.getAttribute('data-id'),
-              category_id: element.getAttribute('category'),
+              category_id: element.getAttribute('category-id'),
               sort_id: index+1
             });
           }
@@ -356,7 +357,7 @@
             
             var keepHtml = $('.rowRef[data-id="'+ data_id +'"]').html();
             $('.rowRef[data-id="'+ data_id +'"]').remove();
-            $('<tr class="rowRef" category="'+droppedInto+'" data-id="'+data_id+'">'+
+            $('<tr class="rowRef" category-id="'+droppedInto+'" data-id="'+data_id+'">'+
                 keepHtml+
               '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ droppedInto +'"]');
             updateIcons();

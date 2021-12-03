@@ -28,7 +28,7 @@ class SprintController extends Controller
     {   
         $newTask = Sprint::create([
             'title' => $request->title,
-            'category' => ($request->category) ? $request->category : env('DEFAULT_CATEGORY_NAME'),
+            'category_id' => $request->category_id ?? Category::where('title',env('DEFAULT_CATEGORY_NAME'))->first()->id,
             'description' => $request->description,
             'url' => $request->url,
         ]);
