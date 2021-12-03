@@ -15,11 +15,15 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')
+                  ->constrained('projects')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+            $table->integer('sort_id')->unsigned()->default(0);
             $table->string('title');
             $table->string('class');
             $table->string('icon');
             $table->string('color');
-            $table->integer('sort_id')->unsigned()->default(0);
             $table->timestamps();
         });
     }

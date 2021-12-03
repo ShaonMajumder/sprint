@@ -1,7 +1,10 @@
-@php $task_table_column_names = []; @endphp
-@foreach ($tasks->first()->toArray() as $key => $column )
-  @if( $key != $tasks->first()->getKeyName() )
-    @php array_push($task_table_column_names, $key);  @endphp
+@php
+  $table_arrays = $tasks;
+  $table_array_column_names = [];
+@endphp
+@foreach ($table_arrays->first()->toArray() as $key => $column )
+  @if( $key != $table_arrays->first()->getKeyName() )
+    @php array_push($table_array_column_names, $key);  @endphp
   @endif
 @endforeach
 
@@ -27,7 +30,7 @@
           <thead>
               <tr>
                 <th scope="col">Icon</th>
-                @foreach ($task_table_column_names as $item)
+                @foreach ($table_array_column_names as $item)
                   @if (in_array($item, $viewable))
                     <th scope="col">{{ $item }}</th>
                   @endif
@@ -139,7 +142,7 @@
       */
       .rowRef td:nth-of-type(1):before { content: 'Icon' ; }
       @php $iterate = 2; @endphp
-      @foreach ($task_table_column_names as $key )
+      @foreach ($table_array_column_names as $key )
         @if( in_array($key, $viewable ) )
             .rowRef td:nth-of-type({{ $iterate++ }}):before { content: '{{ $key }}' ; }
         @endif

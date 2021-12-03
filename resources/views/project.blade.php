@@ -1,12 +1,80 @@
+@php
+  $table_arrays = $tasks;
+  $table_array_column_names = [];
+@endphp
+@foreach ($table_arrays->first()->toArray() as $key => $column )
+  @if( $key != $table_arrays->first()->getKeyName() )
+    @php array_push($table_array_column_names, $key);  @endphp
+  @endif
+@endforeach
+
 @extends('layouts.app')
 @section('content')
 
   <div class="container">
+
+    <div class="alert alert-success" id="success-alert">
+      <button type="button" class="close" data-dismiss="alert">x</button>
+      <i class="far fa-check-circle" aria-label="Success:"></i>
+      <strong>Success! </strong> Product have added to your wishlist.
+    </div>
+
     <div class="row justify-content-center">
-        <i class="fas fa-folder-open"></i>
+
+      @foreach ($projects as $project)
+        <div class="project-item">
+          <i class="fas fa-folder-open fa-2x"></i> <br>
+          <span>{{ $project->title }}</span>
+        </div>
+      @endforeach
+
+      <div class="table-responsive-md">
+        <button type="button" class="icon-button qa" data-target="#createTaskModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Task</button>
+        <button type="button" class="icon-button qa" data-target="#createCategoryModal" data-toggle="modal"> <i class="fas fa-plus"></i> Add Category</button>
+        @include('layouts.create-task-popup')
+        @include('layouts.create-category-popup')
+        <table id="table" class="table-bordered table-hover mb-5">
+          
+          <thead>
+              <tr>
+                <th scope="col">Icon</th>
+                @foreach ($table_array_column_names as $item)
+                  @if (in_array($item, $viewable))
+                    <th scope="col">{{ $item }}</th>
+                  @endif
+                @endforeach
+              </tr>
+          </thead>
+          
+          <tbody style="display: none; height:0;">
+            <!-- For bypassing first header -->
+          </tbody>
+          
+          @foreach ($categories as $category)
+            <tbody class="tablecontents" dropped-into-category="{{ $category->title }}">
+              <tr>
+                <td colspan="{{ count($tasks->first()->toArray()) - 1 }}" class="{{ $category->class }} status" >  <span>{{ $category->title }}</span>  </td>
+              </tr>
+              @foreach($tasks as $data)
+                @if($data->category == $category->title ) 
+                  <tr class="rowRef" category="{{ $category->title }}" data-id="{{  $data->id }}" >
+                    <td class="icon"></td>
+                    @foreach($data->toArray() as $key => $datatd)
+                      {{-- @if( $key != $tasks->first()->getKeyName() ) --}}
+                      @if(in_array($key, $viewable))
+                        <td>{{ $datatd }}</td>
+                      @endif
+                    @endforeach
+                  </tr>
+                @endif
+              @endforeach
+            </tbody>
+          @endforeach
+          
+        </table>
+      </div>
     </div>
   </div>
-
 @endsection
 
 @section('top-head-css')
@@ -77,7 +145,16 @@
         white-space: nowrap;
       }
       
-      
+      /*
+      Label the data
+      */
+      .rowRef td:nth-of-type(1):before { content: 'Icon' ; }
+      @php $iterate = 2; @endphp
+      @foreach ($table_array_column_names as $key )
+        @if( in_array($key, $viewable ) )
+            .rowRef td:nth-of-type({{ $iterate++ }}):before { content: '{{ $key }}' ; }
+        @endif
+      @endforeach
       
     }
   </style>

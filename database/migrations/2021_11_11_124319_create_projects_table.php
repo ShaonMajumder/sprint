@@ -15,7 +15,11 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')
+                  ->constrained('users')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+            $table->integer('sort_id')->unsigned()->default(0);
             $table->string('title')->unique();
             $table->timestamps();
         });

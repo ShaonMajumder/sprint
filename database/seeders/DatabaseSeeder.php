@@ -25,19 +25,14 @@ class DatabaseSeeder extends Seeder
             "email"=> "smazoomder@gmail.com",
             "password" => $default_password
         ]);
-        
-        User::factory(100)->create([
-            "password" => $default_password
-        ]);
 
-        Project::factory()->create([
+        $project1 = Project::factory()->create([
             "user_id" => $user1->id,
-            "title" => "Life"
+            "title" => 'Sprint'
         ]);
-
-        Sprint::factory(5)->create();
 
         Category::factory()->create([
+            "project_id" => $project1->id,
             "title" => "open",
             "class" => "open",
             "sort_id" => 0,
@@ -45,6 +40,7 @@ class DatabaseSeeder extends Seeder
             "color" => '#C1CEAD'
         ]);
         Category::factory()->create([
+            "project_id" => $project1->id,
             "title" => 'done',
             "class" => "done",
             "sort_id" => 1,
@@ -52,6 +48,7 @@ class DatabaseSeeder extends Seeder
             "color" => '#52B67C'
         ]);
         Category::factory()->create([
+            "project_id" => $project1->id,
             "title" => 'bug',
             "class" => "bug",
             "sort_id" => 2,
@@ -59,6 +56,7 @@ class DatabaseSeeder extends Seeder
             "color" => '#D35352'
         ]);
         Category::factory()->create([
+            "project_id" => $project1->id,
             "title" => 'qa',
             "class" => "qa",
             "sort_id" => 3,
@@ -66,6 +64,7 @@ class DatabaseSeeder extends Seeder
             "color" => '#5d7db8'
         ]);
         Category::factory()->create([
+            "project_id" => $project1->id,
             "title" => 'progress',
             "class" => "in-progress",
             "sort_id" => 4,
@@ -73,10 +72,15 @@ class DatabaseSeeder extends Seeder
             "color" => '#D6D46A'
         ]);
 
-        
-    
-    
-    
+        User::factory(100)->create([
+            "password" => $default_password
+        ]);
+
+        Project::factory(5)->create([
+            "user_id" => $user1->id,
+        ]);
+
+        Sprint::factory(5)->create();
         
 
     }

@@ -11,4 +11,16 @@ class Project extends Model
     protected $fillable = [
         'title'
     ];
+
+    /**
+     * Get the user that owns the project
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categories(){
+        return $this->hasMany(Category::class);
+    }
 }

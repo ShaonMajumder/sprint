@@ -18,16 +18,6 @@ class SprintController extends Controller
         return view('sprint', compact('tasks','categories', 'viewable'));
     }
 
-    public function projects()
-    {
-        $viewable = ['title','description','url','task_budget'];
-        
-        $tasks =  Sprint::orderBy('sort_id','ASC')
-                          ->get();
-        $categories = Category::orderBy('sort_id','ASC')->get();
-        return view('projects', compact('tasks','categories', 'viewable'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *

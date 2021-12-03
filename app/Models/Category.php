@@ -13,5 +13,11 @@ class Category extends Model
         'title', 'class', 'icon', 'color', 'sort_id'
     ];
 
-   
+    public function project(){
+        $this->belongsTo(Project::class);
+    }
+
+    public function sprints(){
+        $this->hasMany(Sprint::class);
+    }
 }

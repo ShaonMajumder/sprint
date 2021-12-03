@@ -11,4 +11,8 @@ class Sprint extends Model
     protected $fillable = [
         'sort_id', 'title', 'icon', 'category', 'description', 'url'
     ];
+
+    public function category(){
+        $this->belongsTo(Category::class);
+    }
 }
