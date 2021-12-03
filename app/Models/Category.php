@@ -14,10 +14,10 @@ class Category extends Model
     ];
 
     public function project(){
-        $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class);
     }
 
     public function sprints(){
-        $this->hasMany(Sprint::class);
+        return $this->hasMany(Sprint::class);
     }
 }

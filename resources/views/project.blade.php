@@ -24,7 +24,7 @@
       @foreach ($projects as $project)
         <div class="project-item">
           <i class="fas fa-folder-open fa-2x"></i> <br>
-          <span>{{ $project->title }}</span>
+          <a href="projects?title={{ $project->title }}"><span>{{ $project->title }}</span></a>
         </div>
       @endforeach
 

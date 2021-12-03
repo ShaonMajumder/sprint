@@ -23,12 +23,16 @@ class DatabaseSeeder extends Seeder
         $user1 = User::factory()->create([
             "name" => "Shaon Majumder",
             "email"=> "smazoomder@gmail.com",
-            "password" => $default_password
+            "password" =>  $default_password
         ]);
 
-        $project1 = Project::factory()->create([
+        Project::factory()->create([
+            "title" => 'Life',
             "user_id" => $user1->id,
-            "title" => 'Sprint'
+        ]);
+        $project1 = Project::factory()->create([
+            "title" => 'Software-Time-Money',
+            "user_id" => $user1->id,
         ]);
 
         $categoryDefault = Category::factory()->create([
@@ -75,6 +79,8 @@ class DatabaseSeeder extends Seeder
         User::factory(100)->create([
             "password" => $default_password
         ]);
+
+       
 
         Project::factory(5)->create([
             "user_id" => $user1->id,
