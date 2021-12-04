@@ -233,7 +233,13 @@
       getCategories();
       
       function insertCategory(data){
+        console.log(data);
 
+        //colspan="11"
+        $('<tbody dropped-into-category="'+data.id+'" class="tablecontents ui-sortable ui-droppable"> \
+          <tr><td style="background-color:'+data.color+';" colspan="11" class="'+data.class+' status"><span>'+data.title+'</span></td></tr> \
+        </tbody>').appendTo('#table');
+        
       }
 
       function alertMessage(){
@@ -241,7 +247,6 @@
       }
 
       function insertRow(data){
-        console.log(data);
         $('<tr class="rowRef ui-sortable-handle" category-id="'+data.category_id+'" data-id="'+data.id+'">'+
             '<td class="icon"></td>'+
             '<td>'+data.title+'</td>'+
@@ -256,7 +261,7 @@
       function addCategory(){
         const form = document.querySelector('#newCategoryForm');
         const data = Object.fromEntries(new FormData(form).entries());
-        
+        data['project_title'] = '{{ request()->get('title') }}' ;
         
         $.ajax({
             url: "{{ route('new_category') }}",
@@ -271,8 +276,8 @@
             }
         });
 
-        $('#createTaskModal').modal('hide');
-        $("#newtaskForm").trigger("reset");
+        $('#createCategoryModal').modal('hide');
+        $("#newCategoryForm").trigger("reset");
 
         
         data_id = null;
