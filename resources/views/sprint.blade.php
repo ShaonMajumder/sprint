@@ -47,7 +47,7 @@
           @foreach ($categories as $category)
             <tbody class="tablecontents" dropped-into-category="{{ $category->id }}">
               <tr>
-                <td colspan="{{ count($tasks->first()->toArray()) - 1 }}" class="{{ $category->class }} status" >  <span>{{ $category->title }}</span>  </td>
+                <td colspan="{{ count($viewable)+1 }}" class="{{ $category->class }} status" >  <span>{{ $category->title }}</span>  </td>
               </tr>
               @foreach($tasks as $data)
                 @if($data->category->title == $category->title ) 
@@ -235,11 +235,11 @@
       function insertCategory(data){
         console.log(data);
 
-        //colspan="11"
-        $('<tbody dropped-into-category="'+data.id+'" class="tablecontents ui-sortable ui-droppable"> \
-          <tr><td style="background-color:'+data.color+';" colspan="11" class="'+data.class+' status"><span>'+data.title+'</span></td></tr> \
-        </tbody>').appendTo('#table');
         
+        $('<tbody dropped-into-category="'+data.id+'" class="tablecontents ui-sortable ui-droppable"> \
+          <tr><td colspan="{{ count($viewable)+1 }}" class="'+data.class+' status"><span>'+data.title+'</span></td></tr> \
+        </tbody>').appendTo('#table');
+        $('.'+data.class).css( 'background-color', data.color );
       }
 
       function alertMessage(){
@@ -375,13 +375,25 @@
       }
 
       $( ".tablecontents" ).droppable({
+        accept: ".rowRef",
+        live: true});
+      /*
+      $( ".tablecontents" ).droppable({
+        accept: ".rowRef",
         drop: function( event, ui ) {
           droppedInto = this.getAttribute('dropped-into-category');
           console.log("Dropped Into " + droppedInto);
           droppedAfter();
         }
       });
+      */
 
+      
+      $(".tablecontents").on("drop", function( event, ui ) {
+        droppedInto = this.getAttribute('dropped-into-category');
+        console.log("Dropped Into " + droppedInto);
+        droppedAfter();
+      });
 
       updateIcons();
 
