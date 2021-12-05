@@ -272,9 +272,9 @@
           data: data,
           datatype: 'json',
           success: function (data) { 
-            insertRow(data);
-            
+            insertRow(data.data);
             $("#success-alert").hide();
+            toastr.success(data.success);
           },
           error: function (jqXHR, textStatus, errorThrown) { 
             
