@@ -12,14 +12,8 @@
 @section('content')
 
   <div class="container">
-    @foreach($tasks as $data)
-     {{ $data->category->title }}
-    @endforeach
-    <div class="alert alert-success" id="success-alert">
-      <button type="button" class="close" data-dismiss="alert">x</button>
-      <i class="far fa-check-circle" aria-label="Success:"></i>
-      <strong>Success! </strong> Product have added to your wishlist.
-    </div>
+   
+    
 
     <div class="row justify-content-center">
       <div class="table-responsive-md">
@@ -268,9 +262,11 @@
       function insertRow(data){
         $('<tr class="rowRef ui-sortable-handle" category-id="'+data.category_id+'" data-id="'+data.id+'">'+
             '<td class="icon"></td>'+
-            '<td>'+data.title+'</td>'+
-            '<td>'+data.description+'</td>'+
-            '<td>'+data.url+'</td>'+
+            @foreach ($table_array_column_names as $key )
+              @if( in_array($key, $viewable ) )
+                  '<td>'+data.{{ $key }}+'</td>'+
+              @endif
+            @endforeach
         '</tr>').appendTo('#table .tablecontents[dropped-into-category="'+ data.category_id +'"]');
         
         updatePosition();

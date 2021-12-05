@@ -26,6 +26,7 @@ class CreateSprintsTable extends Migration
             $table->string('time_aloted')->default(0);
             $table->string('url')->unique();
             $table->double('task_budget')->default(0);
+            $table->double('rating')->default(0);
             $table->timestamps();
         });
     }

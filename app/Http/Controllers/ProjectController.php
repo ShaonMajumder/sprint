@@ -17,8 +17,11 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
+        $viewable = ['title','description','url','task_budget','rating'];
+        $request['viewable'] = $viewable;
+
         if(!$request->get('title')){
-            $viewable = ['title','description','url','task_budget'];
+            
         
             $tasks =  Sprint::orderBy('sort_id','ASC')
                             ->get();

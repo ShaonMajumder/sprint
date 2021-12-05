@@ -17,7 +17,7 @@ class SprintController extends Controller
 
     public function index(Request $request)
     {
-        $viewable = ['title','description','url','task_budget'];
+        $viewable = $request->get('viewable');
         
         $tasks =  Project::where('title', $request->get('title'))
                            ->where('user_id', Auth::id())

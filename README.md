@@ -278,6 +278,10 @@ Success Message and Failed Message
 Projects
 Users
 
+
+### On create Category doest bind droppable
+>>> Need solve for fully Single Page Application
+
 ## About Laravel
 
 
