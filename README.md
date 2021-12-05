@@ -267,6 +267,9 @@ Change all folder permissions to 755
 For storage and bootstrap cache (special folders used by laravel for creating and executing files, not available from outside) set permission to 777, for anything inside
 For nodeJS executable, same as above
 
+## Error
+### error: insufficient permission for adding an object to repository database .git/objects
+    >_ sudo chmod 777 -R .git/objects
 ## Features
 Success Message and Failed Message
 Projects
