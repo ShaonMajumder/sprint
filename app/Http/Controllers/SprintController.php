@@ -46,7 +46,8 @@ class SprintController extends Controller
         ]);
         $newTask = Sprint::where('url', $newTask->url)->first();
         $dataArray = $newTask->toArray();
-        return response()->json( $dataArray , 200);
+        
+        return response()->json([ 'data' => $dataArray , 'success' => 'Record successfully added'] , 200);
     }
 
     public function updatePosition(Request $request)

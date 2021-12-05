@@ -212,7 +212,26 @@
     }
 
     $(document).ready(function () {  
+
       updatePosition();
+
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "10000",
+        "extendedTimeOut": "10000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      };
 
       resize();
       $("#success-alert").hide();
@@ -294,9 +313,9 @@
           data: data,
           datatype: 'json',
           success: function (data) { 
-            insertRow(data);
-            
+            insertRow(data.data);
             $("#success-alert").hide();
+            toastr.success(data.success);
           },
           error: function (jqXHR, textStatus, errorThrown) { 
             
