@@ -24,7 +24,7 @@ class SprintFactory extends Factory
     {
         return [
             'title' => $this->faker->name,
-            'category' => 'open',
+            //'category' => 'open',
             'description' => $this->faker->text,
             'url' => Str::slug($this->faker->name),
         ];

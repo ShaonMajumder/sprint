@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "datatables.net-bs4": "^1.11.3",
+        "firebase": "^9.6.0",
         "jsdom": "^18.0.1"
     }
 }

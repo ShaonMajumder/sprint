@@ -15,13 +15,18 @@ class CreateSprintsTable extends Migration
     {
         Schema::create('sprints', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')
+                  ->constrained('categories')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
             $table->integer('sort_id')->unsigned()->default(0);
             $table->string('title');
-            $table->string('category')->default( env('DEFAULT_CATEGORY_NAME') );
+            //$table->string('category')->default( env('DEFAULT_CATEGORY_NAME') );
             $table->string('description');
             $table->string('time_aloted')->default(0);
-            $table->double('money_aloted')->default(0);
             $table->string('url')->unique();
+            $table->double('task_budget')->default(0);
+            $table->double('rating')->default(0);
             $table->timestamps();
         });
     }

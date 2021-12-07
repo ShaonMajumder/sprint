@@ -9,6 +9,10 @@ class Sprint extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'sort_id', 'title', 'category', 'description', 'url'
+        'sort_id', 'title', 'icon', 'category_id', 'description', 'url'
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

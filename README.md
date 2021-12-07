@@ -245,7 +245,11 @@ set .env
 [Done] New Category Sort_ID
 New Category Build Success Message
 New Task Build Success Message
-
+USER WISE
+[In Progress] Relationship
+[Done] View of Auth USER ID -> Project WISE -> Category WISE -> Tasks 
+Create Category
+Create Project
 
 ## File Permission Sudo Error
 ### octal Permission -
@@ -265,6 +269,18 @@ Change all file permissions to 644
 Change all folder permissions to 755
 For storage and bootstrap cache (special folders used by laravel for creating and executing files, not available from outside) set permission to 777, for anything inside
 For nodeJS executable, same as above
+
+## Error
+### error: insufficient permission for adding an object to repository database .git/objects
+    >_ sudo chmod 777 -R .git/objects
+## Features
+Success Message and Failed Message
+Projects
+Users
+
+
+### On create Category doest bind droppable
+>>> Need solve for fully Single Page Application
 
 ## About Laravel
 
