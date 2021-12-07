@@ -334,7 +334,15 @@ if accidentally pushed
 git commit -m "message"
 git push heroku master
 
+secure_asset() instead of asset
+URL::forceScheme('https');
 
+In DatabaseServiceProvider.php line 91:
+                                   
+  Class "Faker\Factory" not found 
+
+  composer install
+  
 Node problem
 ## Learning Laravel
 
