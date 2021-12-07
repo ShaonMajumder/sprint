@@ -312,6 +312,11 @@ heroku buildpacks:set heroku/nodejs
 git add .
 git commit -m "message"
 git push heroku master
+if accidentally pushed
+ heroku buildpacks:set heroku/php
+ git add .
+git commit -m "message"
+git push heroku master
 
 
 Node problem
