@@ -343,6 +343,17 @@ In DatabaseServiceProvider.php line 91:
 
   composer install
   
+
+heroku config:add ACCOUNT_DEFAULT_PASSWORD=123456
+heroku run
+php artisan migrate:fresh --seed
+
+composer.json
+"post-install-cmd": [
+            "php artisan clear-compiled",
+            "composer install"
+        ]
+        
 Node problem
 ## Learning Laravel
 
