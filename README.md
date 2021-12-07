@@ -282,8 +282,33 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
-##
+## Heroku
+heroku login
 
+Procfile ->
+web: vendor/bin/heroku-php-apache2 public/
+
+heroku config:add APP_NAME=Sprint
+heroku config:add APP_ENV=production
+heroku config:add APP_KEY=base64:1YXJsT2CuJggIrC4GAvb4Bf/PZRaXbVu2ZO+1Y1GFnQ=
+heroku config:add APP_DEBUG=true
+heroku config:add APP_URL=https://sprint-robist.herokuapp.com
+
+heroku pg:credentials:url
+U will get the credentials , replace the values and execute
+
+heroku config:add DB_CONNECTION=pgsql
+heroku config:add DB_HOST=host
+heroku config:add DB_PORT=port
+heroku config:add DB_DATABASE=dbname
+heroku config:add DB_USERNAME=user
+heroku config:add DB_PASSWORD=password
+
+composer install
+php artisan migrate:fresh --seed
+
+On local cli
+heroku buildpacks:set heroku/nodejs
 
 ## Learning Laravel
 
