@@ -309,7 +309,12 @@ php artisan migrate:fresh --seed
 
 On local cli
 heroku buildpacks:set heroku/nodejs
+git add .
+git commit -m "message"
+git push heroku master
 
+
+Node problem
 ## Learning Laravel
 
 
