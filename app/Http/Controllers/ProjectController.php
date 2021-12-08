@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Category;
 use App\Models\Sprint;
 use App\Http\Controllers\SprintController;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -30,7 +31,18 @@ class ProjectController extends Controller
             $categories = Category::orderBy('sort_id','ASC')->get();
             return view('project', compact('tasks','categories','projects','viewable'));
         }else{
-            return SprintController::index($request);
+            $viewable = $request->get('viewable');
+        //dd(Project::where('title', $request->get('title')) ->where('user_id', Auth::id()) ->first());
+
+            $tasks =  Project::where('title', $request->get('title'))
+                            ->where('user_id', Auth::id())
+                            ->first()
+                            ->sprints()
+                            ->orderBy('sort_id','ASC')
+                            ->get();
+            
+            $categories = Category::orderBy('sort_id','ASC')->get();
+            return view('sprint', compact('tasks','categories', 'viewable'));
         }
         
 
