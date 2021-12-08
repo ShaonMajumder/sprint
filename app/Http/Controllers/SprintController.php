@@ -18,7 +18,8 @@ class SprintController extends Controller
     public function index(Request $request)
     {
         $viewable = $request->get('viewable');
-        
+        //dd(Project::where('title', $request->get('title')) ->where('user_id', Auth::id()) ->first());
+
         $tasks =  Project::where('title', $request->get('title'))
                            ->where('user_id', Auth::id())
                            ->first()
