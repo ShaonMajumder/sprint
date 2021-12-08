@@ -15,21 +15,7 @@ class SprintController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
-    {
-        $viewable = $request->get('viewable');
-        //dd(Project::where('title', $request->get('title')) ->where('user_id', Auth::id()) ->first());
-
-        $tasks =  Project::where('title', $request->get('title'))
-                           ->where('user_id', Auth::id())
-                           ->first()
-                           ->sprints()
-                           ->orderBy('sort_id','ASC')
-                           ->get();
-        
-        $categories = Category::orderBy('sort_id','ASC')->get();
-        return view('sprint', compact('tasks','categories', 'viewable'));
-    }
+    
 
     /**
      * Store a newly created resource in storage.
